@@ -1,1 +1,1 @@
-/home/just_ne_just/PathPlanningProject/Bin/Debug/YourFirstName_YourLastName_ASearch
+/home/just_ne_just/PathPlanningProject/Bin/Debug/Andrew_Semakov_ASearch

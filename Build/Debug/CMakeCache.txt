@@ -14,6 +14,12 @@
 # EXTERNAL cache entries
 ########################
 
+//Value Computed by CMake
+Andrew_Semakov_ASearch_BINARY_DIR:STATIC=/home/just_ne_just/PathPlanningProject/Build/Debug
+
+//Value Computed by CMake
+Andrew_Semakov_ASearch_SOURCE_DIR:STATIC=/home/just_ne_just/PathPlanningProject
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 
@@ -145,7 +151,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=YourFirstName_YourLastName_ASearch
+CMAKE_PROJECT_NAME:STATIC=Andrew_Semakov_ASearch
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib

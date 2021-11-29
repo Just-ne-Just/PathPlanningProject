@@ -11,6 +11,12 @@
 #include <chrono>
 #include <iterator>
 
+struct Comparator {
+    bool operator ()(Node* lhs, Node* rhs) {
+        return lhs->F < rhs->F;
+    }
+};
+
 class Search
 {
     public:
@@ -40,9 +46,8 @@ class Search
         //so think of the data structures that needed to be used, about the wrap-up classes (if needed)
         //Start with very simple (and ineffective) structures like list or vector and make it work first
         //and only then begin enhancement!
-
-        std::set<Node*>                 open;
-        std::set<Node*>                 close;
+        std::set<Node*, Comparator>    open;
+        std::set<Node*, Comparator>    close;
         SearchResult                    sresult; //This will store the search result
         std::list<Node>                 lppath, hppath; //
 

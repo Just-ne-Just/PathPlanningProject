@@ -181,17 +181,17 @@ PPLIB/fast:
 .PHONY : PPLIB/fast
 
 #=============================================================================
-# Target rules for targets named YourFirstName_YourLastName_ASearch
+# Target rules for targets named Andrew_Semakov_ASearch
 
 # Build rule for target.
-YourFirstName_YourLastName_ASearch: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 YourFirstName_YourLastName_ASearch
-.PHONY : YourFirstName_YourLastName_ASearch
+Andrew_Semakov_ASearch: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Andrew_Semakov_ASearch
+.PHONY : Andrew_Semakov_ASearch
 
 # fast build rule for target.
-YourFirstName_YourLastName_ASearch/fast:
-	$(MAKE) -f Src/CMakeFiles/YourFirstName_YourLastName_ASearch.dir/build.make Src/CMakeFiles/YourFirstName_YourLastName_ASearch.dir/build
-.PHONY : YourFirstName_YourLastName_ASearch/fast
+Andrew_Semakov_ASearch/fast:
+	$(MAKE) -f Src/CMakeFiles/Andrew_Semakov_ASearch.dir/build.make Src/CMakeFiles/Andrew_Semakov_ASearch.dir/build
+.PHONY : Andrew_Semakov_ASearch/fast
 
 #=============================================================================
 # Target rules for targets named testbench
@@ -220,7 +220,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... PPLIB"
-	@echo "... YourFirstName_YourLastName_ASearch"
+	@echo "... Andrew_Semakov_ASearch"
 	@echo "... testbench"
 .PHONY : help
 
