@@ -5,9 +5,11 @@
 #include "environmentoptions.h"
 #include <list>
 #include <vector>
+#include <set>
 #include <math.h>
 #include <limits>
 #include <chrono>
+#include <iterator>
 
 class Search
 {
@@ -15,6 +17,13 @@ class Search
         Search();
         ~Search(void);
         SearchResult startSearch(ILogger *Logger, const Map &Map, const EnvironmentOptions &options);
+
+        template <typename It>
+        It findInSet(It inp, It end, int search_i, int search_j);
+
+        void makePrimaryPath(const Node* curNode);
+
+        void makeSecondaryPath();
 
     protected:
         //CODE HERE
@@ -32,7 +41,8 @@ class Search
         //Start with very simple (and ineffective) structures like list or vector and make it work first
         //and only then begin enhancement!
 
-
+        std::set<Node*>                 open;
+        std::set<Node*>                 close;
         SearchResult                    sresult; //This will store the search result
         std::list<Node>                 lppath, hppath; //
 

@@ -1,0 +1,4 @@
+"C:\Program Files\JetBrains\CLion 2021.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" \\wsl$\Ubuntu-20.04\home\just_ne_just\PathPlanningProject
+-- Configuring done
+-- Generating done
+-- Build files have been written to: //wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/cmake-build-debug

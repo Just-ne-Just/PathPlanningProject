@@ -1,0 +1,1 @@
+/home/just_ne_just/PathPlanningProject/Bin/Release/YourFirstName_YourLastName_ASearch
