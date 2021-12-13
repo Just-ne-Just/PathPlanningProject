@@ -77,6 +77,8 @@ vector
 -
 set
 -
+unordered_set
+-
 math.h
 -
 limits
@@ -84,6 +86,10 @@ limits
 chrono
 -
 iterator
+-
+iostream
+-
+iomanip
 -
 
 ../../Src/searchresult.h

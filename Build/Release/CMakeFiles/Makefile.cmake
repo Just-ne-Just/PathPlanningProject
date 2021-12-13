@@ -50,6 +50,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "Src/CMakeFiles/PPLIB.dir/DependInfo.cmake"
-  "Src/CMakeFiles/YourFirstName_YourLastName_ASearch.dir/DependInfo.cmake"
+  "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/DependInfo.cmake"
   "Tests/CMakeFiles/testbench.dir/DependInfo.cmake"
   )

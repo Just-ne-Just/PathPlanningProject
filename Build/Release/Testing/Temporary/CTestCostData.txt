@@ -1,25 +1,19 @@
-Test1 0 0
-Test2 0 0
-Test3 0 0
-Test4 0 0
-Test5 0 0
-Test6 0 0
-Test7 0 0
-Test8 0 0
-Test9 0 0
-Test10 0 0
-Test11 0 0
-Test12 0 0
+Test1 28 0.00646104
+Test2 28 0.00649104
+Test3 1 0
+Test4 1 0
+Test5 2 0
+Test6 28 0.00549266
+Test7 1 0
+Test8 1 0
+Test9 2 0
+Test10 28 0.00773182
+Test11 28 0.00723665
+Test12 28 0.00671474
 ---
-Test1
-Test2
 Test3
 Test4
 Test5
-Test6
 Test7
 Test8
 Test9
-Test10
-Test11
-Test12

@@ -48,6 +48,7 @@ int main(int argc, char* argv[])
     
     if(abs(len - result.pathlength) > EPS)
     {
+//        std::cout << result.pathlength << ' ' << len << '\n';
         std::cerr<<"Incorrect path legth"<<std::endl;
         return 1;
     }
