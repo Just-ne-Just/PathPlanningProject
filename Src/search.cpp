@@ -14,20 +14,21 @@ Search::~Search() {
     }
 }
 
-double Search::ComputeHeuristic(int i_cur, int j_cur, const EnvironmentOptions &options, const Map& map) {
-    auto [i_finish, j_finish] = map.getFinish();
-    int i_d = abs(i_cur - i_finish), j_d = abs(j_cur - j_finish);
-    if (options.metrictype == 0) {
-        return double(CN_SQRT_TWO) * std::min(i_d, j_d) + abs(i_d - j_d);
+double Search::ComputeHeuristic(int i_current, int j_current,
+                                int i_finish, int j_finish,
+                                const EnvironmentOptions &options) {
+    if (options.metrictype == 2) {
+        return std::sqrt(std::pow(i_current - i_finish, 2) + std::pow(j_current - j_finish, 2));
     } else if (options.metrictype == 1) {
-        return i_d + j_d;
-    } else if (options.metrictype == 2) {
-        return sqrt(pow(i_d, 2) + pow(j_d, 2));
+        return abs(i_current - i_finish) + abs(j_current - j_finish);
     } else if (options.metrictype == 3) {
-        return std::max(i_d, j_d);
+        return std::max(abs(i_current - i_finish), abs(j_current - j_finish));
+    } else if (options.metrictype == 0){
+        return (std::abs(abs(i_current - i_finish) - abs(j_current - j_finish)) +
+        std::min(abs(i_current - i_finish), abs(j_current - j_finish)));
     }
+    return 0;
 }
-
 SearchResult Search::startSearch(ILogger *Logger, const Map &map, const EnvironmentOptions &options)
 {
 //    std::cout << map.getStart().first << ' ' << map.getStart().second << '\n';
@@ -35,12 +36,13 @@ SearchResult Search::startSearch(ILogger *Logger, const Map &map, const Environm
     auto TBEGIN = std::chrono::system_clock::now();
     auto H = ComputeHeuristic(map.getStart().first,
                               map.getStart().second,
-                              options, map);
+                              map.getFinish().first,
+                              map.getFinish().second,
+                              options);
 //    std::cout << H << '\n';
     auto begin = new Node{map.getStart().first, map.getStart().second, H, 0, H, nullptr};
     open_to_get.insert(begin);
     open_to_find.insert({{begin->i, begin->j}, begin});
-    sresult.nodescreated++;
     const Node* lastnode = nullptr;
     while (!open_to_get.empty()) {
         sresult.numberofsteps++;
@@ -66,18 +68,34 @@ SearchResult Search::startSearch(ILogger *Logger, const Map &map, const Environm
                         if (!options.allowdiagonal) {
                             continue;
                         }
-                        if (!options.allowdiagonal && map.CellIsObstacle(v->i + i, v->j) && map.CellIsObstacle(v->i, v->j + j)) {
-                            continue;
+                        if (!map.CellOnGrid(v->i, v->j + j) ||
+                            !map.CellIsTraversable(v->i, v->j + j)) {
+                            if (!options.cutcorners) {
+                                continue;
+                            }
                         }
-                        if (!options.cutcorners && (map.CellIsObstacle(v->i + i, v->j) || map.CellIsObstacle(v->i, v->j + j))) {
-                            continue;
+                        if (!map.CellOnGrid(v->i + i, v->j) ||
+                            !map.CellIsTraversable(v->i + i, v->j)) {
+                            if (!options.cutcorners) {
+                                continue;
+                            }
+                        }
+                        if ((!map.CellOnGrid(v->i, v->j + j) ||
+                             !map.CellIsTraversable(v->i, v->j + j)) &&
+                            (!map.CellOnGrid(v->i + i, v->j) ||
+                             !map.CellIsTraversable(v->i + i, v->j))) {
+                            if (!options.allowsqueeze) {
+                                continue;
+                            }
                         }
                         std::pair<int, int> to_find = {v->i + i, v->j + j};
                         auto f1 = open_to_find.find(to_find);
                         auto f2 = close.find(to_find);
                         if (f1 == open_to_find.end() && f2 == close.end()) {
                             H = ComputeHeuristic(v->i + i, v->j + j,
-                                                      options, map);
+                                                      map.getFinish().first,
+                                                      map.getFinish().second,
+                                                      options);
                             auto neigh = new Node{v->i + i, v->j + j, v->g + double(CN_SQRT_TWO) + H, v->g + double(CN_SQRT_TWO), H, v};
                             open_to_find[to_find] = neigh;
                             open_to_get.insert(neigh);
@@ -86,10 +104,15 @@ SearchResult Search::startSearch(ILogger *Logger, const Map &map, const Environm
                                 continue;
                             }
                             if (f1 != open_to_find.end()) {
+                                auto neigh = (*f1).second;
                                 if (f1->second->g > v->g + CN_SQRT_TWO) {
-                                    f1->second->g = v->g + CN_SQRT_TWO;
-                                    f1->second->F = f1->second->g + f1->second->H;
-                                    f1->second->parent = v;
+                                    open_to_find.erase(f1);
+                                    open_to_get.erase(open_to_get.find(neigh));
+                                    neigh->g = v->g + CN_SQRT_TWO;
+                                    neigh->F = neigh->g + neigh->H;
+                                    neigh->parent = v;
+                                    open_to_find.insert({{neigh->i, neigh->j}, neigh});
+                                    open_to_get.insert(neigh);
                                 }
                             }
                         }
@@ -102,7 +125,9 @@ SearchResult Search::startSearch(ILogger *Logger, const Map &map, const Environm
                         auto f2 = close.find(to_find);
                         if (f1 == open_to_find.end() && f2 == close.end()) {
                             H = ComputeHeuristic(v->i + i, v->j + j,
-                                                      options, map);
+                                                 map.getFinish().first,
+                                                 map.getFinish().second,
+                                                 options);
                             auto neigh = new Node{v->i + i, v->j + j, v->g + 1 + H, v->g + 1, H, v};
                             //std::cout << v->i + i << ' ' << v->j + j << '\n';
                             //std::cout << open_to_find.size() << ' ' << open_to_get.size() << '\n';
@@ -116,10 +141,15 @@ SearchResult Search::startSearch(ILogger *Logger, const Map &map, const Environm
                                 continue;
                             }
                             if (f1 != open_to_find.end()) {
+                                auto neigh = (*f1).second;
                                 if (f1->second->g > v->g + 1) {
-                                    f1->second->g = v->g + 1;
-                                    f1->second->F = f1->second->g + f1->second->H;
-                                    f1->second->parent = v;
+                                    open_to_find.erase(f1);
+                                    open_to_get.erase(open_to_get.find(neigh));
+                                    neigh->g = v->g + 1;
+                                    neigh->F = neigh->g + neigh->H;
+                                    neigh->parent = v;
+                                    open_to_find.insert({{neigh->i, neigh->j}, neigh});
+                                    open_to_get.insert(neigh);
                                 }
                             }
                         }

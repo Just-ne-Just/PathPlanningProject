@@ -69,6 +69,10 @@ chrono
 -
 iterator
 -
+iostream
+-
+iomanip
+-
 
 /home/just_ne_just/PathPlanningProject/Src/searchresult.h
 list

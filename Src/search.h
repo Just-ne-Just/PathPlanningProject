@@ -40,7 +40,9 @@ class Search
         ~Search(void);
         SearchResult startSearch(ILogger *Logger, const Map &Map, const EnvironmentOptions &options);
 
-        double ComputeHeuristic(int i_cur, int j_cur, const EnvironmentOptions &options, const Map& map);
+        double ComputeHeuristic(int i_current, int j_current,
+                                int i_finish, int j_finish,
+                                const EnvironmentOptions &options);
 
         void makePrimaryPath(const Node* curNode, const Map &map);
 
