@@ -15,13 +15,23 @@
 #include <iomanip>
 
 struct Comparator {
-    bool operator ()(const std::pair<std::string, Node*>& lhs, const std::pair<std::string, Node*>& rhs) {
-        if (lhs.second->F == rhs.second->F) {
-            return lhs.first < rhs.first;
+    bool operator() (const Node* a, const Node* b) const {
+        if (a->F == b->F) {
+            if (a->i == b->i) {
+                return a->j < b->j;
+            }
+            return a->i < b->i;
         }
-        return lhs.second->F < rhs.second->F;
+        return a->F < b->F;
     }
 };
+
+struct MyHash {
+    std::size_t operator()(const std::pair<int, int> &x) const {
+        return std::hash<int>()(x.first) ^ std::hash<int>()(x.second);
+    }
+};
+
 
 class Search
 {
@@ -30,9 +40,7 @@ class Search
         ~Search(void);
         SearchResult startSearch(ILogger *Logger, const Map &Map, const EnvironmentOptions &options);
 
-        double ComputeHeuristic(int i_current, int j_current,
-                                int i_finish, int j_finish,
-                                const EnvironmentOptions &options);
+        double ComputeHeuristic(int i_cur, int j_cur, const EnvironmentOptions &options, const Map& map);
 
         void makePrimaryPath(const Node* curNode, const Map &map);
 
@@ -53,9 +61,9 @@ class Search
         //so think of the data structures that needed to be used, about the wrap-up classes (if needed)
         //Start with very simple (and ineffective) structures like list or vector and make it work first
         //and only then begin enhancement!
-        std::set<std::pair<std::string, Node*>, Comparator>     open_to_get;
-        std::unordered_map<std::string, Node*>                  open_to_find;
-        std::unordered_map<std::string, Node*>                  close;
+        std::set<Node*, Comparator>     open_to_get;
+        std::unordered_map<std::pair<int, int>, Node*, MyHash>  open_to_find;
+        std::unordered_map<std::pair<int, int>, Node*, MyHash>  close;
         SearchResult                                            sresult; //This will store the search resultdsdsfsdfdfsfsdfsfsfsdfsd
         std::list<Node>                                         lppath, hppath; //xcxcvxvxcvxcvcvxvxc
 

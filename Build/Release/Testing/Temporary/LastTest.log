@@ -1,10 +1,10 @@
-Start testing: Dec 13 19:24 MSK
+Start testing: Dec 28 20:56 MSK
 ----------------------------------------------------------
 1/12 Testing: Test1
 1/12 Test: Test1
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/0_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test1" start time: Dec 13 19:24 MSK
+"Test1" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 tiny
@@ -13,10 +13,10 @@ Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
 <end of output>
-Test time =   0.18 sec
+Test time =   0.17 sec
 ----------------------------------------------------------
 Test Passed.
-"Test1" end time: Dec 13 19:24 MSK
+"Test1" end time: Dec 28 20:56 MSK
 "Test1" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -24,7 +24,7 @@ Test Passed.
 2/12 Test: Test2
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/1_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test2" start time: Dec 13 19:24 MSK
+"Test2" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 tiny
@@ -33,10 +33,10 @@ Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
 <end of output>
-Test time =   0.18 sec
+Test time =   0.13 sec
 ----------------------------------------------------------
 Test Passed.
-"Test2" end time: Dec 13 19:24 MSK
+"Test2" end time: Dec 28 20:56 MSK
 "Test2" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -44,7 +44,7 @@ Test Passed.
 3/12 Test: Test3
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/2_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test3" start time: Dec 13 19:24 MSK
+"Test3" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 Warning! Value of'metrictype' is not correctly specified.
@@ -54,13 +54,13 @@ Warning! Value of 'logpath' tag is missing!
 Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
-639.299 639.299
+636.200000 639.298584
 Incorrect path legth
 <end of output>
-Test time =   0.22 sec
+Test time =   0.15 sec
 ----------------------------------------------------------
 Test Failed.
-"Test3" end time: Dec 13 19:24 MSK
+"Test3" end time: Dec 28 20:56 MSK
 "Test3" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -68,7 +68,7 @@ Test Failed.
 4/12 Test: Test4
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/3_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test4" start time: Dec 13 19:24 MSK
+"Test4" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 Warning! Value of'metrictype' is not correctly specified.
@@ -78,13 +78,13 @@ Warning! Value of 'logpath' tag is missing!
 Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
-639.299 639.299
+636.200000 639.298584
 Incorrect path legth
 <end of output>
-Test time =   0.20 sec
+Test time =   0.08 sec
 ----------------------------------------------------------
 Test Failed.
-"Test4" end time: Dec 13 19:24 MSK
+"Test4" end time: Dec 28 20:56 MSK
 "Test4" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -92,7 +92,7 @@ Test Failed.
 5/12 Test: Test5
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/4_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test5" start time: Dec 13 19:24 MSK
+"Test5" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 Warning! Value of'metrictype' is not correctly specified.
@@ -102,13 +102,13 @@ Warning! Value of 'logpath' tag is missing!
 Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
-666.831 666.831
+664.400000 666.830505
 Incorrect path legth
 <end of output>
-Test time =   0.28 sec
+Test time =   0.15 sec
 ----------------------------------------------------------
 Test Failed.
-"Test5" end time: Dec 13 19:24 MSK
+"Test5" end time: Dec 28 20:56 MSK
 "Test5" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -116,7 +116,7 @@ Test Failed.
 6/12 Test: Test6
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/5_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test6" start time: Dec 13 19:24 MSK
+"Test6" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 Warning! Value of'metrictype' is not correctly specified.
@@ -127,10 +127,10 @@ Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
 <end of output>
-Test time =   0.15 sec
+Test time =   0.08 sec
 ----------------------------------------------------------
 Test Passed.
-"Test6" end time: Dec 13 19:24 MSK
+"Test6" end time: Dec 28 20:56 MSK
 "Test6" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -138,7 +138,7 @@ Test Passed.
 7/12 Test: Test7
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/6_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test7" start time: Dec 13 19:24 MSK
+"Test7" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 Warning! Value of'metrictype' is not correctly specified.
@@ -148,13 +148,13 @@ Warning! Value of 'logpath' tag is missing!
 Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
-639.299 639.299
+636.200000 639.298584
 Incorrect path legth
 <end of output>
-Test time =   0.30 sec
+Test time =   0.19 sec
 ----------------------------------------------------------
 Test Failed.
-"Test7" end time: Dec 13 19:24 MSK
+"Test7" end time: Dec 28 20:56 MSK
 "Test7" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -162,7 +162,7 @@ Test Failed.
 8/12 Test: Test8
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/7_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test8" start time: Dec 13 19:24 MSK
+"Test8" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 Warning! Value of'metrictype' is not correctly specified.
@@ -172,13 +172,13 @@ Warning! Value of 'logpath' tag is missing!
 Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
-639.299 639.299
+636.200000 639.298584
 Incorrect path legth
 <end of output>
-Test time =   0.24 sec
+Test time =   0.15 sec
 ----------------------------------------------------------
 Test Failed.
-"Test8" end time: Dec 13 19:24 MSK
+"Test8" end time: Dec 28 20:56 MSK
 "Test8" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -186,7 +186,7 @@ Test Failed.
 9/12 Test: Test9
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/8_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test9" start time: Dec 13 19:24 MSK
+"Test9" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 Warning! Value of'metrictype' is not correctly specified.
@@ -196,13 +196,13 @@ Warning! Value of 'logpath' tag is missing!
 Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
-666.831 666.831
+664.400000 666.830505
 Incorrect path legth
 <end of output>
-Test time =   0.22 sec
+Test time =   0.14 sec
 ----------------------------------------------------------
 Test Failed.
-"Test9" end time: Dec 13 19:24 MSK
+"Test9" end time: Dec 28 20:56 MSK
 "Test9" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -210,7 +210,7 @@ Test Failed.
 10/12 Test: Test10
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/9_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test10" start time: Dec 13 19:24 MSK
+"Test10" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 Warning! Value of'metrictype' is not correctly specified.
@@ -221,10 +221,10 @@ Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
 <end of output>
-Test time =   0.22 sec
+Test time =   0.13 sec
 ----------------------------------------------------------
 Test Passed.
-"Test10" end time: Dec 13 19:24 MSK
+"Test10" end time: Dec 28 20:56 MSK
 "Test10" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -232,7 +232,7 @@ Test Passed.
 11/12 Test: Test11
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/A_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test11" start time: Dec 13 19:24 MSK
+"Test11" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 tiny
@@ -241,10 +241,10 @@ Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
 <end of output>
-Test time =   0.20 sec
+Test time =   0.08 sec
 ----------------------------------------------------------
 Test Passed.
-"Test11" end time: Dec 13 19:24 MSK
+"Test11" end time: Dec 28 20:56 MSK
 "Test11" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -252,7 +252,7 @@ Test Passed.
 12/12 Test: Test12
 Command: "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/testbench" "../../../TestData/B_test.xml"
 Directory: /home/just_ne_just/PathPlanningProject/Build/Release/Tests
-"Test12" start time: Dec 13 19:24 MSK
+"Test12" start time: Dec 28 20:56 MSK
 Output:
 ----------------------------------------------------------
 tiny
@@ -261,11 +261,11 @@ Value of 'logpath' tag was defined to 'current directory'.
 Warning! Value of 'logfilename' tag is missing.
 Value of 'logfilename' tag was defined to default (original filename +'_log' + original file extension.
 <end of output>
-Test time =   0.19 sec
+Test time =   0.09 sec
 ----------------------------------------------------------
 Test Passed.
-"Test12" end time: Dec 13 19:24 MSK
+"Test12" end time: Dec 28 20:56 MSK
 "Test12" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Dec 13 19:24 MSK
+End testing: Dec 28 20:56 MSK

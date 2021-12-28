@@ -1,6 +1,7 @@
 #include "mission.h"
 #include "tinyxml2.h"
 #include <cassert>
+#include <iomanip>
 
 #define EPS 1e-5
 
@@ -48,7 +49,7 @@ int main(int argc, char* argv[])
     
     if(abs(len - result.pathlength) > EPS)
     {
-//        std::cout << result.pathlength << ' ' << len << '\n';
+        std::cerr << std::fixed << std::setprecision(6) << result.pathlength << ' ' << std::setprecision(6) << len << '\n';
         std::cerr<<"Incorrect path legth"<<std::endl;
         return 1;
     }

@@ -7,43 +7,39 @@ Search::Search()
 
 Search::~Search() {
     for (auto& x : open_to_get) {
-        delete x.second;
+        delete x;
     }
     for (auto& x : close) {
         delete x.second;
     }
 }
 
-double Search::ComputeHeuristic(int i_current, int j_current,
-                                int i_finish, int j_finish,
-                                const EnvironmentOptions &options) {
-    if (options.metrictype == 2) {
-        return std::sqrt(std::pow(i_current - i_finish, 2) + std::pow(j_current - j_finish, 2));
+double Search::ComputeHeuristic(int i_cur, int j_cur, const EnvironmentOptions &options, const Map& map) {
+    auto [i_finish, j_finish] = map.getFinish();
+    int i_d = abs(i_cur - i_finish), j_d = abs(j_cur - j_finish);
+    if (options.metrictype == 0) {
+        return double(CN_SQRT_TWO) * std::min(i_d, j_d) + abs(i_d - j_d);
     } else if (options.metrictype == 1) {
-        return abs(i_current - i_finish) + abs(j_current - j_finish);
+        return i_d + j_d;
+    } else if (options.metrictype == 2) {
+        return sqrt(pow(i_d, 2) + pow(j_d, 2));
     } else if (options.metrictype == 3) {
-        return std::max(abs(i_current - i_finish), abs(j_current - j_finish));
-    } else if (options.metrictype == 0){
-        return (abs(i_current - i_finish) + abs(j_current - j_finish)) -
-        0.6 * std::min(abs(i_current - i_finish), abs(j_current - j_finish));
+        return std::max(i_d, j_d);
     }
-    return 0;
 }
 
 SearchResult Search::startSearch(ILogger *Logger, const Map &map, const EnvironmentOptions &options)
 {
 //    std::cout << map.getStart().first << ' ' << map.getStart().second << '\n';
 //    std::cout << map.getFinish().first << ' ' << map.getFinish().second << '\n';
+    auto TBEGIN = std::chrono::system_clock::now();
     auto H = ComputeHeuristic(map.getStart().first,
                               map.getStart().second,
-                              map.getFinish().first,
-                              map.getFinish().second,
-                              options);
+                              options, map);
 //    std::cout << H << '\n';
-    auto TBEGIN = std::chrono::system_clock::now();
     auto begin = new Node{map.getStart().first, map.getStart().second, H, 0, H, nullptr};
-    open_to_get.insert({std::to_string(begin->i) + " " + std::to_string(begin->j), begin});
-    open_to_find.insert({std::to_string(begin->i) + " " + std::to_string(begin->j), begin});
+    open_to_get.insert(begin);
+    open_to_find.insert({{begin->i, begin->j}, begin});
     sresult.nodescreated++;
     const Node* lastnode = nullptr;
     while (!open_to_get.empty()) {
@@ -52,12 +48,12 @@ SearchResult Search::startSearch(ILogger *Logger, const Map &map, const Environm
         //std::cout << open_to_find.size() << ' ' << open_to_get.size() << '\n';
 
         open_to_get.erase(open_to_get.begin());
-        open_to_find.erase(open_to_find.find(std::to_string(v.second->i) + " " + std::to_string(v.second->j)));
+        open_to_find.erase(open_to_find.find({v->i, v->j}));
         //std::cout << open_to_find.size() << ' ' << open_to_get.size() << '\n';
 
-        close.insert({std::to_string(v.second->i) + " " + std::to_string(v.second->j), v.second});
-        if (v.second->i == map.getFinish().first && v.second->j == map.getFinish().second) {
-            lastnode = v.second;
+        close.insert({{v->i, v->j}, v});
+        if (v->i == map.getFinish().first && v->j == map.getFinish().second) {
+            lastnode = v;
             break;
         }
         for (int i = -1; i <= 1; ++i) {
@@ -65,85 +61,66 @@ SearchResult Search::startSearch(ILogger *Logger, const Map &map, const Environm
                 if (i == 0 && j == 0) { continue; }
                 // Diagonal
                 if (abs(i) == abs(j)) {
-                    if (map.CellOnGrid(v.second->i + i, v.second->j + j) &&
-                        map.CellIsTraversable(v.second->i + i, v.second->j + j)) {
+                    if (map.CellOnGrid(v->i + i, v->j + j) &&
+                        map.CellIsTraversable(v->i + i, v->j + j)) {
                         if (!options.allowdiagonal) {
                             continue;
                         }
-                        if (!map.CellOnGrid(v.second->i, v.second->j + j) ||
-                            !map.CellIsTraversable(v.second->i, v.second->j + j)) {
-                            if (!options.cutcorners) {
-                                continue;
-                            }
+                        if (!options.allowdiagonal && map.CellIsObstacle(v->i + i, v->j) && map.CellIsObstacle(v->i, v->j + j)) {
+                            continue;
                         }
-                        if (!map.CellOnGrid(v.second->i + i, v.second->j) ||
-                            !map.CellIsTraversable(v.second->i + i, v.second->j)) {
-                            if (!options.cutcorners) {
-                                continue;
-                            }
+                        if (!options.cutcorners && (map.CellIsObstacle(v->i + i, v->j) || map.CellIsObstacle(v->i, v->j + j))) {
+                            continue;
                         }
-                        if ((!map.CellOnGrid(v.second->i, v.second->j + j) ||
-                            !map.CellIsTraversable(v.second->i, v.second->j + j)) &&
-                            (!map.CellOnGrid(v.second->i + i, v.second->j) ||
-                            !map.CellIsTraversable(v.second->i + i, v.second->j))) {
-                            if (!options.allowsqueeze) {
-                                continue;
-                            }
-                        }
-                        std::string to_find = std::to_string(v.second->i + i) + " " + std::to_string(v.second->j + j);
+                        std::pair<int, int> to_find = {v->i + i, v->j + j};
                         auto f1 = open_to_find.find(to_find);
                         auto f2 = close.find(to_find);
                         if (f1 == open_to_find.end() && f2 == close.end()) {
-                            H = ComputeHeuristic(v.second->i + i, v.second->j + j,
-                                                      map.getFinish().first,
-                                                      map.getFinish().second,
-                                                      options);
-                            auto neigh = new Node{v.second->i + i, v.second->j + j, v.second->g + sqrt(2) + H, v.second->g + CN_SQRT_TWO, H, v.second};
-                            open_to_find.insert({to_find, neigh});
-                            open_to_get.insert({to_find, neigh});
+                            H = ComputeHeuristic(v->i + i, v->j + j,
+                                                      options, map);
+                            auto neigh = new Node{v->i + i, v->j + j, v->g + double(CN_SQRT_TWO) + H, v->g + double(CN_SQRT_TWO), H, v};
+                            open_to_find[to_find] = neigh;
+                            open_to_get.insert(neigh);
                         } else {
-
-                            if (f1 != open_to_find.end()) {
-                                if (f1->second->g > v.second->g + sqrt(2)) {
-                                    f1->second->g = v.second->g + sqrt(2);
-                                    f1->second->F = f1->second->g + f1->second->H;
-                                    f1->second->parent = v.second;
-                                }
-                            } else if (f2 != close.end()) {
+                            if (f2 != close.end()) {
                                 continue;
+                            }
+                            if (f1 != open_to_find.end()) {
+                                if (f1->second->g > v->g + CN_SQRT_TWO) {
+                                    f1->second->g = v->g + CN_SQRT_TWO;
+                                    f1->second->F = f1->second->g + f1->second->H;
+                                    f1->second->parent = v;
+                                }
                             }
                         }
                     }
                 } else {
-                    if (map.CellOnGrid(v.second->i + i, v.second->j + j) && map.CellIsTraversable(v.second->i + i, v.second->j + j)) {
-                        std::string to_find = std::to_string(v.second->i + i) + " " + std::to_string(v.second->j + j);
+                    if (map.CellOnGrid(v->i + i, v->j + j) && map.CellIsTraversable(v->i + i, v->j + j)) {
+//                        std::cout << "KEK" << '\n';
+                        std::pair<int, int> to_find = {v->i + i, v->j + j};
                         auto f1 = open_to_find.find(to_find);
                         auto f2 = close.find(to_find);
                         if (f1 == open_to_find.end() && f2 == close.end()) {
-                            H = ComputeHeuristic(v.second->i + i, v.second->j + j,
-                                                      map.getFinish().first,
-                                                      map.getFinish().second,
-                                                      options);
-                            auto neigh = new Node{v.second->i + i, v.second->j + j, v.second->g + 1 + H, v.second->g + 1, H, v.second};
-                            //std::cout << v.second->i + i << ' ' << v.second->j + j << '\n';
+                            H = ComputeHeuristic(v->i + i, v->j + j,
+                                                      options, map);
+                            auto neigh = new Node{v->i + i, v->j + j, v->g + 1 + H, v->g + 1, H, v};
+                            //std::cout << v->i + i << ' ' << v->j + j << '\n';
                             //std::cout << open_to_find.size() << ' ' << open_to_get.size() << '\n';
 
                             open_to_find[to_find] = neigh;
-                            if (open_to_get.find({to_find, neigh}) != open_to_get.end()) {
-                                std::cout << open_to_get.find({to_find, neigh})->first << ' ' << open_to_get.find({to_find, neigh})->second << '\n';
-                            }
-                            open_to_get.insert({to_find, neigh});
+                            open_to_get.insert(neigh);
                             //std::cout << open_to_find.size() << ' ' << open_to_get.size() << '\n';
 
                         } else {
-                            if (f1 != open_to_find.end()) {
-                                if (f1->second->g > v.second->g + 1) {
-                                    f1->second->g = v.second->g + 1;
-                                    f1->second->F = f1->second->g + f1->second->H;
-                                    f1->second->parent = v.second;
-                                }
-                            } else if (f2 != close.end()) {
+                            if (f2 != close.end()) {
                                 continue;
+                            }
+                            if (f1 != open_to_find.end()) {
+                                if (f1->second->g > v->g + 1) {
+                                    f1->second->g = v->g + 1;
+                                    f1->second->F = f1->second->g + f1->second->H;
+                                    f1->second->parent = v;
+                                }
                             }
                         }
                     }
@@ -156,6 +133,7 @@ SearchResult Search::startSearch(ILogger *Logger, const Map &map, const Environm
     sresult.hppath = &hppath; //Here is a constant pointer
     sresult.lppath = &lppath;
     sresult.nodescreated = open_to_get.size() + close.size();
+    sresult.pathlength = lastnode->g;
     auto TEND = std::chrono::system_clock::now();
     std::chrono::duration<double> time = (TEND - TBEGIN);
     sresult.time = time.count();
@@ -172,13 +150,6 @@ void Search::makePrimaryPath(const Node* curNode,  const Map &map) {
         lppath.push_front(Node(*curNode));
         if (lppath.size() >= 2) {
             (++lppath.begin())->parent = &(*lppath.begin());
-        }
-        if (curNode->parent) {
-            if (abs(curNode->i - curNode->parent->i) + abs(curNode->j - curNode->parent->j) == 1) {
-                sresult.pathlength += 1;
-            } else {
-                sresult.pathlength += CN_SQRT_TWO;
-            }
         }
         curNode = curNode->parent;
     }
