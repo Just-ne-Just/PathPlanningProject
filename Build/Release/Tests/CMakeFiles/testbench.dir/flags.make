@@ -6,5 +6,5 @@ CXX_FLAGS =  -std=c++11 -O2 -Wall -Wextra -O3 -DNDEBUG
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/just_ne_just/PathPlanningProject/Tests/../Src 
+CXX_INCLUDES = -I/home/just-ne-just/PathPlanningProject/Tests/../Src 
 

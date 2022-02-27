@@ -61,6 +61,8 @@ search.h
 ../../Src/search.h
 xmllogger.h
 ../../Src/xmllogger.h
+seqsearch.h
+../../Src/seqsearch.h
 
 ../../Src/node.h
 
@@ -98,6 +100,8 @@ list
 node.h
 ../../Src/node.h
 
+../../Src/seqsearch.h
+
 ../../Src/tinyxml2.h
 ctype.h
 -
@@ -134,11 +138,11 @@ tinyxml2.h
 ilogger.h
 ../../Src/ilogger.h
 
-/home/just_ne_just/PathPlanningProject/Tests/testbench.cpp
+/home/just-ne-just/PathPlanningProject/Tests/testbench.cpp
 mission.h
-/home/just_ne_just/PathPlanningProject/Tests/mission.h
+/home/just-ne-just/PathPlanningProject/Tests/mission.h
 tinyxml2.h
-/home/just_ne_just/PathPlanningProject/Tests/tinyxml2.h
+/home/just-ne-just/PathPlanningProject/Tests/tinyxml2.h
 cassert
 -
 iomanip

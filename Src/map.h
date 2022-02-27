@@ -40,6 +40,8 @@ class Map
         int getMapHeight() const;
         int getMapWidth() const;
         double getCellSize() const;
+        void makeObstacle(int i, int j);
+        void makeTraversable(int i, int j);
         std::pair<int, int> getStart() const;
         std::pair<int, int> getFinish() const;
 };

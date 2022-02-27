@@ -20,6 +20,7 @@ Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o: ../../Src/mission.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o: ../../Src/node.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o: ../../Src/search.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o: ../../Src/searchresult.h
+Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o: ../../Src/seqsearch.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o: ../../Src/tinyxml2.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o: ../../Src/xmllogger.h
 
@@ -38,6 +39,7 @@ Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o: ../../Src/mission.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o: ../../Src/node.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o: ../../Src/search.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o: ../../Src/searchresult.h
+Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o: ../../Src/seqsearch.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o: ../../Src/tinyxml2.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o: ../../Src/xmllogger.h
 
@@ -49,6 +51,7 @@ Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o: ../../Src/node.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o: ../../Src/search.cpp
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o: ../../Src/search.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o: ../../Src/searchresult.h
+Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o: ../../Src/seqsearch.h
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o: ../../Src/tinyxml2.h
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.o: ../../Src/tinyxml2.cpp

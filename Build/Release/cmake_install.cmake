@@ -1,8 +1,8 @@
-# Install script for directory: /home/just_ne_just/PathPlanningProject
+# Install script for directory: /home/just-ne-just/PathPlanningProject
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/just_ne_just/PathPlanningProject")
+  set(CMAKE_INSTALL_PREFIX "/home/just-ne-just/PathPlanningProject")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -39,8 +39,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/just_ne_just/PathPlanningProject/Build/Release/Src/cmake_install.cmake")
-  include("/home/just_ne_just/PathPlanningProject/Build/Release/Tests/cmake_install.cmake")
+  include("/home/just-ne-just/PathPlanningProject/Build/Release/Src/cmake_install.cmake")
+  include("/home/just-ne-just/PathPlanningProject/Build/Release/Tests/cmake_install.cmake")
 
 endif()
 
@@ -52,5 +52,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/just_ne_just/PathPlanningProject/Build/Release/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/just-ne-just/PathPlanningProject/Build/Release/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

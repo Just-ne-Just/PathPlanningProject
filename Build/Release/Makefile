@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/just_ne_just/PathPlanningProject
+CMAKE_SOURCE_DIR = /home/just-ne-just/PathPlanningProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/just_ne_just/PathPlanningProject/Build/Release
+CMAKE_BINARY_DIR = /home/just-ne-just/PathPlanningProject/Build/Release
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,9 +137,9 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles /home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles /home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

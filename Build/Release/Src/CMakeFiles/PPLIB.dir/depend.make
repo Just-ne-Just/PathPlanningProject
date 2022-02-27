@@ -25,6 +25,7 @@ Src/CMakeFiles/PPLIB.dir/mission.cpp.o: ../../Src/mission.h
 Src/CMakeFiles/PPLIB.dir/mission.cpp.o: ../../Src/node.h
 Src/CMakeFiles/PPLIB.dir/mission.cpp.o: ../../Src/search.h
 Src/CMakeFiles/PPLIB.dir/mission.cpp.o: ../../Src/searchresult.h
+Src/CMakeFiles/PPLIB.dir/mission.cpp.o: ../../Src/seqsearch.h
 Src/CMakeFiles/PPLIB.dir/mission.cpp.o: ../../Src/tinyxml2.h
 Src/CMakeFiles/PPLIB.dir/mission.cpp.o: ../../Src/xmllogger.h
 
@@ -36,6 +37,7 @@ Src/CMakeFiles/PPLIB.dir/search.cpp.o: ../../Src/node.h
 Src/CMakeFiles/PPLIB.dir/search.cpp.o: ../../Src/search.cpp
 Src/CMakeFiles/PPLIB.dir/search.cpp.o: ../../Src/search.h
 Src/CMakeFiles/PPLIB.dir/search.cpp.o: ../../Src/searchresult.h
+Src/CMakeFiles/PPLIB.dir/search.cpp.o: ../../Src/seqsearch.h
 Src/CMakeFiles/PPLIB.dir/search.cpp.o: ../../Src/tinyxml2.h
 
 Src/CMakeFiles/PPLIB.dir/tinyxml2.cpp.o: ../../Src/tinyxml2.cpp

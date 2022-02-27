@@ -1,1 +1,1 @@
-/home/just_ne_just/PathPlanningProject/Bin/Release/Andrew_Semakov_ASearch
+/home/just-ne-just/PathPlanningProject/Bin/Release/Andrew_Semakov_ASearch

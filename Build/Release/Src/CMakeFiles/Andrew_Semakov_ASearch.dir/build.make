@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/just_ne_just/PathPlanningProject
+CMAKE_SOURCE_DIR = /home/just-ne-just/PathPlanningProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/just_ne_just/PathPlanningProject/Build/Release
+CMAKE_BINARY_DIR = /home/just-ne-just/PathPlanningProject/Build/Release
 
 # Include any dependencies generated for this target.
 include Src/CMakeFiles/Andrew_Semakov_ASearch.dir/depend.make
@@ -59,107 +59,107 @@ include Src/CMakeFiles/Andrew_Semakov_ASearch.dir/flags.make
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.o: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/flags.make
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.o: ../../Src/config.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.o"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.o -c /home/just_ne_just/PathPlanningProject/Src/config.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.o"
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.o -c /home/just-ne-just/PathPlanningProject/Src/config.cpp
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.i"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just_ne_just/PathPlanningProject/Src/config.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.i
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just-ne-just/PathPlanningProject/Src/config.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.i
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.s"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just_ne_just/PathPlanningProject/Src/config.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.s
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just-ne-just/PathPlanningProject/Src/config.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.s
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.o: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/flags.make
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.o: ../../Src/environmentoptions.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.o"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.o -c /home/just_ne_just/PathPlanningProject/Src/environmentoptions.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.o"
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.o -c /home/just-ne-just/PathPlanningProject/Src/environmentoptions.cpp
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.i"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just_ne_just/PathPlanningProject/Src/environmentoptions.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.i
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just-ne-just/PathPlanningProject/Src/environmentoptions.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.i
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.s"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just_ne_just/PathPlanningProject/Src/environmentoptions.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.s
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just-ne-just/PathPlanningProject/Src/environmentoptions.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.s
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.o: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/flags.make
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.o: ../../Src/map.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.o"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.o -c /home/just_ne_just/PathPlanningProject/Src/map.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.o"
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.o -c /home/just-ne-just/PathPlanningProject/Src/map.cpp
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.i"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just_ne_just/PathPlanningProject/Src/map.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.i
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just-ne-just/PathPlanningProject/Src/map.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.i
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.s"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just_ne_just/PathPlanningProject/Src/map.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.s
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just-ne-just/PathPlanningProject/Src/map.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.s
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/flags.make
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o: ../../Src/mission.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o -c /home/just_ne_just/PathPlanningProject/Src/mission.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o"
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o -c /home/just-ne-just/PathPlanningProject/Src/mission.cpp
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.i"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just_ne_just/PathPlanningProject/Src/mission.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.i
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just-ne-just/PathPlanningProject/Src/mission.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.i
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.s"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just_ne_just/PathPlanningProject/Src/mission.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.s
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just-ne-just/PathPlanningProject/Src/mission.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.s
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/flags.make
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o: ../../Src/search.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o -c /home/just_ne_just/PathPlanningProject/Src/search.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o"
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o -c /home/just-ne-just/PathPlanningProject/Src/search.cpp
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.i"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just_ne_just/PathPlanningProject/Src/search.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.i
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just-ne-just/PathPlanningProject/Src/search.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.i
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.s"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just_ne_just/PathPlanningProject/Src/search.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.s
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just-ne-just/PathPlanningProject/Src/search.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.s
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.o: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/flags.make
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.o: ../../Src/tinyxml2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.o"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.o -c /home/just_ne_just/PathPlanningProject/Src/tinyxml2.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.o"
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.o -c /home/just-ne-just/PathPlanningProject/Src/tinyxml2.cpp
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.i"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just_ne_just/PathPlanningProject/Src/tinyxml2.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.i
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just-ne-just/PathPlanningProject/Src/tinyxml2.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.i
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.s"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just_ne_just/PathPlanningProject/Src/tinyxml2.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.s
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just-ne-just/PathPlanningProject/Src/tinyxml2.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.s
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.o: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/flags.make
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.o: ../../Src/xmllogger.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.o"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.o -c /home/just_ne_just/PathPlanningProject/Src/xmllogger.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.o"
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.o -c /home/just-ne-just/PathPlanningProject/Src/xmllogger.cpp
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.i"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just_ne_just/PathPlanningProject/Src/xmllogger.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.i
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just-ne-just/PathPlanningProject/Src/xmllogger.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.i
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.s"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just_ne_just/PathPlanningProject/Src/xmllogger.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.s
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just-ne-just/PathPlanningProject/Src/xmllogger.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.s
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/flags.make
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o: ../../Src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o -c /home/just_ne_just/PathPlanningProject/Src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o"
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o -c /home/just-ne-just/PathPlanningProject/Src/main.cpp
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.i"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just_ne_just/PathPlanningProject/Src/main.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.i
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/just-ne-just/PathPlanningProject/Src/main.cpp > CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.i
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.s"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just_ne_just/PathPlanningProject/Src/main.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.s
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/just-ne-just/PathPlanningProject/Src/main.cpp -o CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.s
 
 # Object files for target Andrew_Semakov_ASearch
 Andrew_Semakov_ASearch_OBJECTS = \
@@ -185,8 +185,8 @@ Src/Andrew_Semakov_ASearch: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.
 Src/Andrew_Semakov_ASearch: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o
 Src/Andrew_Semakov_ASearch: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/build.make
 Src/Andrew_Semakov_ASearch: Src/CMakeFiles/Andrew_Semakov_ASearch.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Andrew_Semakov_ASearch"
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Andrew_Semakov_ASearch.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Andrew_Semakov_ASearch"
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Andrew_Semakov_ASearch.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/build: Src/Andrew_Semakov_ASearch
@@ -194,10 +194,10 @@ Src/CMakeFiles/Andrew_Semakov_ASearch.dir/build: Src/Andrew_Semakov_ASearch
 .PHONY : Src/CMakeFiles/Andrew_Semakov_ASearch.dir/build
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/clean:
-	cd /home/just_ne_just/PathPlanningProject/Build/Release/Src && $(CMAKE_COMMAND) -P CMakeFiles/Andrew_Semakov_ASearch.dir/cmake_clean.cmake
+	cd /home/just-ne-just/PathPlanningProject/Build/Release/Src && $(CMAKE_COMMAND) -P CMakeFiles/Andrew_Semakov_ASearch.dir/cmake_clean.cmake
 .PHONY : Src/CMakeFiles/Andrew_Semakov_ASearch.dir/clean
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/depend:
-	cd /home/just_ne_just/PathPlanningProject/Build/Release && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/just_ne_just/PathPlanningProject /home/just_ne_just/PathPlanningProject/Src /home/just_ne_just/PathPlanningProject/Build/Release /home/just_ne_just/PathPlanningProject/Build/Release/Src /home/just_ne_just/PathPlanningProject/Build/Release/Src/CMakeFiles/Andrew_Semakov_ASearch.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/just-ne-just/PathPlanningProject/Build/Release && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/just-ne-just/PathPlanningProject /home/just-ne-just/PathPlanningProject/Src /home/just-ne-just/PathPlanningProject/Build/Release /home/just-ne-just/PathPlanningProject/Build/Release/Src /home/just-ne-just/PathPlanningProject/Build/Release/Src/CMakeFiles/Andrew_Semakov_ASearch.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Src/CMakeFiles/Andrew_Semakov_ASearch.dir/depend
 

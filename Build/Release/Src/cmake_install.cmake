@@ -1,8 +1,8 @@
-# Install script for directory: /home/just_ne_just/PathPlanningProject/Src
+# Install script for directory: /home/just-ne-just/PathPlanningProject/Src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/just_ne_just/PathPlanningProject")
+  set(CMAKE_INSTALL_PREFIX "/home/just-ne-just/PathPlanningProject")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -45,7 +45,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
            FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/Bin/Debug/Andrew_Semakov_ASearch"
            RPATH "")
     endif()
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/Bin/Debug" TYPE EXECUTABLE FILES "/home/just_ne_just/PathPlanningProject/Build/Release/Src/Andrew_Semakov_ASearch")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/Bin/Debug" TYPE EXECUTABLE FILES "/home/just-ne-just/PathPlanningProject/Build/Release/Src/Andrew_Semakov_ASearch")
     if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/Bin/Debug/Andrew_Semakov_ASearch" AND
        NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/Bin/Debug/Andrew_Semakov_ASearch")
       if(CMAKE_INSTALL_DO_STRIP)
@@ -63,7 +63,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
            FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/Bin/Release/Andrew_Semakov_ASearch"
            RPATH "")
     endif()
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/Bin/Release" TYPE EXECUTABLE FILES "/home/just_ne_just/PathPlanningProject/Build/Release/Src/Andrew_Semakov_ASearch")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/Bin/Release" TYPE EXECUTABLE FILES "/home/just-ne-just/PathPlanningProject/Build/Release/Src/Andrew_Semakov_ASearch")
     if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/Bin/Release/Andrew_Semakov_ASearch" AND
        NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/Bin/Release/Andrew_Semakov_ASearch")
       if(CMAKE_INSTALL_DO_STRIP)

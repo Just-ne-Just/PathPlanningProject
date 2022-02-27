@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 
     mission.createEnvironmentOptions();
     mission.createSearch();
-    mission.startSearch();
+    mission.startSeqSearch();
     SearchResult result = mission.getSearchResult();
 
     

@@ -1,8 +1,8 @@
-# Install script for directory: /home/just_ne_just/PathPlanningProject/Tests
+# Install script for directory: /home/just-ne-just/PathPlanningProject/Tests
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/just_ne_just/PathPlanningProject")
+  set(CMAKE_INSTALL_PREFIX "/home/just-ne-just/PathPlanningProject")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

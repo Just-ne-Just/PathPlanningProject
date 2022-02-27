@@ -10,6 +10,7 @@ Tests/CMakeFiles/testbench.dir/testbench.cpp.o: ../../Src/mission.h
 Tests/CMakeFiles/testbench.dir/testbench.cpp.o: ../../Src/node.h
 Tests/CMakeFiles/testbench.dir/testbench.cpp.o: ../../Src/search.h
 Tests/CMakeFiles/testbench.dir/testbench.cpp.o: ../../Src/searchresult.h
+Tests/CMakeFiles/testbench.dir/testbench.cpp.o: ../../Src/seqsearch.h
 Tests/CMakeFiles/testbench.dir/testbench.cpp.o: ../../Src/tinyxml2.h
 Tests/CMakeFiles/testbench.dir/testbench.cpp.o: ../../Src/xmllogger.h
 Tests/CMakeFiles/testbench.dir/testbench.cpp.o: ../../Tests/testbench.cpp

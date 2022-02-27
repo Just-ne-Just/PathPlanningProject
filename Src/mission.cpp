@@ -55,6 +55,10 @@ void Mission::startSearch()
     sr = search.startSearch(logger, map, options);
 }
 
+void Mission::startSeqSearch() {
+    sr = seqsearch.startSeqSearch(logger, map, options);
+}
+
 void Mission::printSearchResultsToConsole()
 {
     std::cout << "Path ";

@@ -32,6 +32,16 @@ bool Map::CellIsObstacle(int i, int j) const
     return (Grid[i][j] != CN_GC_NOOBS);
 }
 
+void Map::makeObstacle(int i, int j)
+{
+    Grid[i][j] = !CN_GC_NOOBS;
+}
+
+void Map::makeTraversable(int i, int j)
+{
+    Grid[i][j] = CN_GC_NOOBS;
+}
+
 bool Map::CellOnGrid(int i, int j) const
 {
     return (i < height && i >= 0 && j < width && j >= 0);

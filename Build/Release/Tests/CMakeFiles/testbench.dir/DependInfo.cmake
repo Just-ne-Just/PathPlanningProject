@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/just_ne_just/PathPlanningProject/Tests/testbench.cpp" "/home/just_ne_just/PathPlanningProject/Build/Release/Tests/CMakeFiles/testbench.dir/testbench.cpp.o"
+  "/home/just-ne-just/PathPlanningProject/Tests/testbench.cpp" "/home/just-ne-just/PathPlanningProject/Build/Release/Tests/CMakeFiles/testbench.dir/testbench.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,7 +15,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/just_ne_just/PathPlanningProject/Build/Release/Src/CMakeFiles/PPLIB.dir/DependInfo.cmake"
+  "/home/just-ne-just/PathPlanningProject/Build/Release/Src/CMakeFiles/PPLIB.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

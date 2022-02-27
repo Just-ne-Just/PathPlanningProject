@@ -44,10 +44,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/just_ne_just/PathPlanningProject
+CMAKE_SOURCE_DIR = /home/just-ne-just/PathPlanningProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/just_ne_just/PathPlanningProject/Build/Release
+CMAKE_BINARY_DIR = /home/just-ne-just/PathPlanningProject/Build/Release
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -115,14 +115,14 @@ Tests/clean: Tests/CMakeFiles/testbench.dir/clean
 Src/CMakeFiles/PPLIB.dir/all:
 	$(MAKE) -f Src/CMakeFiles/PPLIB.dir/build.make Src/CMakeFiles/PPLIB.dir/depend
 	$(MAKE) -f Src/CMakeFiles/PPLIB.dir/build.make Src/CMakeFiles/PPLIB.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=10,11,12,13,14,15,16,17 "Built target PPLIB"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=10,11,12,13,14,15,16,17 "Built target PPLIB"
 .PHONY : Src/CMakeFiles/PPLIB.dir/all
 
 # Build rule for subdir invocation for target.
 Src/CMakeFiles/PPLIB.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 Src/CMakeFiles/PPLIB.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles 0
 .PHONY : Src/CMakeFiles/PPLIB.dir/rule
 
 # Convenience name for target.
@@ -142,14 +142,14 @@ Src/CMakeFiles/PPLIB.dir/clean:
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/all:
 	$(MAKE) -f Src/CMakeFiles/Andrew_Semakov_ASearch.dir/build.make Src/CMakeFiles/Andrew_Semakov_ASearch.dir/depend
 	$(MAKE) -f Src/CMakeFiles/Andrew_Semakov_ASearch.dir/build.make Src/CMakeFiles/Andrew_Semakov_ASearch.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target Andrew_Semakov_ASearch"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target Andrew_Semakov_ASearch"
 .PHONY : Src/CMakeFiles/Andrew_Semakov_ASearch.dir/all
 
 # Build rule for subdir invocation for target.
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles 0
 .PHONY : Src/CMakeFiles/Andrew_Semakov_ASearch.dir/rule
 
 # Convenience name for target.
@@ -169,14 +169,14 @@ Src/CMakeFiles/Andrew_Semakov_ASearch.dir/clean:
 Tests/CMakeFiles/testbench.dir/all: Src/CMakeFiles/PPLIB.dir/all
 	$(MAKE) -f Tests/CMakeFiles/testbench.dir/build.make Tests/CMakeFiles/testbench.dir/depend
 	$(MAKE) -f Tests/CMakeFiles/testbench.dir/build.make Tests/CMakeFiles/testbench.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=18,19 "Built target testbench"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles --progress-num=18,19 "Built target testbench"
 .PHONY : Tests/CMakeFiles/testbench.dir/all
 
 # Build rule for subdir invocation for target.
 Tests/CMakeFiles/testbench.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 Tests/CMakeFiles/testbench.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/just_ne_just/PathPlanningProject/Build/Release/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/just-ne-just/PathPlanningProject/Build/Release/CMakeFiles 0
 .PHONY : Tests/CMakeFiles/testbench.dir/rule
 
 # Convenience name for target.
