@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/testbench.dir/testbench.cpp.obj"
-  "libtestbench.dll.a"
-  "testbench.exe"
-  "testbench.exe.manifest"
+  "CMakeFiles/testbench.dir/testbench.cpp.o"
+  "CMakeFiles/testbench.dir/testbench.cpp.o.d"
+  "testbench"
   "testbench.pdb"
 )
 

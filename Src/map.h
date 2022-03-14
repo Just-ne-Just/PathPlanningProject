@@ -26,6 +26,8 @@ class Map
         int     goal_i, goal_j;
         double  cellSize;
         int**   Grid;
+        int**   VisibleGrid;
+        int     visibility;
 
     public:
         Map();
@@ -36,14 +38,18 @@ class Map
         bool CellIsTraversable (int i, int j) const;
         bool CellOnGrid (int i, int j) const;
         bool CellIsObstacle(int i, int j) const;
+        bool CellIsVisible (int i, int j) const;
         int  getValue(int i, int j) const;
         int getMapHeight() const;
         int getMapWidth() const;
         double getCellSize() const;
         void makeObstacle(int i, int j);
         void makeTraversable(int i, int j);
+        void makeVisible(int i, int j);
+        void makeInvisible(int i, int j);
         std::pair<int, int> getStart() const;
         std::pair<int, int> getFinish() const;
+        int getVisibility() const;
 };
 
 #endif

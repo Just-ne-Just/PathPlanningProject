@@ -10,21 +10,30 @@ Map::Map()
     goal_i = -1;
     goal_j = -1;
     Grid = nullptr;
+    VisibleGrid = nullptr;
     cellSize = 1;
+    visibility = 50;
 }
 
 Map::~Map()
 {
     if (Grid) {
-        for (int i = 0; i < height; ++i)
+        for (int i = 0; i < height; ++i) {
             delete[] Grid[i];
+            delete[] VisibleGrid[i];
+        }
         delete[] Grid;
+        delete[] VisibleGrid;
     }
 }
 
 bool Map::CellIsTraversable(int i, int j) const
 {
     return (Grid[i][j] == CN_GC_NOOBS);
+}
+
+bool Map::CellIsVisible (int i, int j) const {
+    return (VisibleGrid[i][j] == 1);
 }
 
 bool Map::CellIsObstacle(int i, int j) const
@@ -40,6 +49,14 @@ void Map::makeObstacle(int i, int j)
 void Map::makeTraversable(int i, int j)
 {
     Grid[i][j] = CN_GC_NOOBS;
+}
+
+void Map::makeVisible(int i, int j) {
+    VisibleGrid[i][j] = 1;
+}
+
+void Map::makeInvisible(int i, int j) {
+    VisibleGrid[i][j] = 0;
 }
 
 bool Map::CellOnGrid(int i, int j) const
@@ -95,8 +112,11 @@ bool Map::getMap(const char *FileName)
 
         if (!hasGridMem && hasHeight && hasWidth) {
             Grid = new int *[height];
-            for (int i = 0; i < height; ++i)
+            VisibleGrid = new int *[height];
+            for (int i = 0; i < height; ++i) {
                 Grid[i] = new int[width];
+                VisibleGrid[i] = new int[width];
+            }
             hasGridMem = true;
         }
 
@@ -285,6 +305,11 @@ bool Map::getMap(const char *FileName)
                         stream << elems[grid_j];
                         stream >> val;
                         Grid[grid_i][grid_j] = val;
+                        if (abs(grid_i - start_i) <= visibility && abs(grid_j - start_j) <= visibility) {
+                            VisibleGrid[grid_i][grid_j] = 1;
+                        } else {
+                            VisibleGrid[grid_i][grid_j] = 0;
+                        }
                     }
 
                 if (grid_j != width) {
@@ -357,4 +382,8 @@ std::pair<int, int> Map::getStart() const
 std::pair<int, int> Map::getFinish() const
 {
     return { goal_i, goal_j };
+}
+
+int Map::getVisibility() const {
+    return visibility;
 }

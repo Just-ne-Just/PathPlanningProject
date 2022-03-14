@@ -13,6 +13,8 @@
 #include <iterator>
 #include <iostream>
 #include <iomanip>
+#include <iostream>
+#include <fstream>
 
 struct Comparator {
     bool operator() (const Node* a, const Node* b) const {
@@ -90,6 +92,9 @@ public:
 
     void makeSecondaryPath();
     void localClear();
+    void ExpandVisibility(Map& map);
+    void PrintInFile(Map& map, std::pair<Node*, Node*> i_path);
+    void NormalizePath();
 
 protected:
     //CODE HERE
@@ -106,7 +111,7 @@ protected:
     //so think of the data structures that needed to be used, about the wrap-up classes (if needed)
     //Start with very simple (and ineffective) structures like list or vector and make it work first
     //and only then begin enhancement!
-    std::set<Node*, Comparator>     open_to_get;
+    std::set<Node*, Comparator>                             open_to_get;
     std::unordered_map<std::pair<int, int>, Node*, MyHash>  open_to_find;
     std::unordered_map<std::pair<int, int>, Node*, MyHash>  close;
     SearchResult                                            sresult; //This will store the search result

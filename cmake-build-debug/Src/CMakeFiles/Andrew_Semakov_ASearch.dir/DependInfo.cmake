@@ -1,22 +1,21 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
   )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/Src/config.cpp" "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/cmake-build-debug/Src/CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.obj"
-  "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/Src/environmentoptions.cpp" "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/cmake-build-debug/Src/CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.obj"
-  "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/Src/main.cpp" "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/cmake-build-debug/Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.obj"
-  "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/Src/map.cpp" "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/cmake-build-debug/Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.obj"
-  "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/Src/mission.cpp" "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/cmake-build-debug/Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.obj"
-  "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/Src/search.cpp" "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/cmake-build-debug/Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.obj"
-  "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/Src/tinyxml2.cpp" "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/cmake-build-debug/Src/CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.obj"
-  "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/Src/xmllogger.cpp" "//wsl$/Ubuntu-20.04/home/just_ne_just/PathPlanningProject/cmake-build-debug/Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.obj"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/drewsemakov/PathPlanningProject/Src/config.cpp" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.o" "gcc" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/config.cpp.o.d"
+  "/Users/drewsemakov/PathPlanningProject/Src/environmentoptions.cpp" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.o" "gcc" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/environmentoptions.cpp.o.d"
+  "/Users/drewsemakov/PathPlanningProject/Src/main.cpp" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o" "gcc" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o.d"
+  "/Users/drewsemakov/PathPlanningProject/Src/map.cpp" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.o" "gcc" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.o.d"
+  "/Users/drewsemakov/PathPlanningProject/Src/mission.cpp" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o" "gcc" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o.d"
+  "/Users/drewsemakov/PathPlanningProject/Src/search.cpp" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o" "gcc" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o.d"
+  "/Users/drewsemakov/PathPlanningProject/Src/tinyxml2.cpp" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.o" "gcc" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/tinyxml2.cpp.o.d"
+  "/Users/drewsemakov/PathPlanningProject/Src/xmllogger.cpp" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.o" "gcc" "Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.o.d"
   )
 
 # Targets to which this target links.

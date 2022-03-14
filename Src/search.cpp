@@ -172,6 +172,7 @@ SearchResult Search::startSearch(ILogger *Logger, const Map &map, const Environm
 //    std::cout << std::fixed << std::setprecision(8) << sresult.pathlength << '\n';
 //    std::cout << sresult.numberofsteps << '\n';
 //    std::cout << sresult.nodescreated << '\n';
+//    PrintInFile(map);
     return sresult;
 }
 
@@ -233,15 +234,11 @@ double SeqSearch::ComputeHeuristic(int i_current, int j_current,
 std::pair<Node*, Node*> SeqSearch::searchStep(ILogger *Logger, Map &map, const EnvironmentOptions &options,
                                               Node startNode)
 {
-//    std::cout << map.getStart().first << ' ' << map.getStart().second << '\n';
-//    std::cout << map.getFinish().first << ' ' << map.getFinish().second << '\n';
-//    auto TBEGIN = std::chrono::system_clock::now();
     auto H = ComputeHeuristic(startNode.i,
                               startNode.j,
                               map.getFinish().first,
                               map.getFinish().second,
                               options);
-//    std::cout << H << '\n';
     auto begin = new Node{startNode.i, startNode.j, H, 0, H, nullptr, nullptr};
     open_to_get.insert(begin);
     open_to_find.insert({{begin->i, begin->j}, begin});
@@ -249,12 +246,9 @@ std::pair<Node*, Node*> SeqSearch::searchStep(ILogger *Logger, Map &map, const E
     while (!open_to_get.empty()) {
         sresult.numberofsteps++;
         auto v = *open_to_get.begin();
-        //std::cout << open_to_find.size() << ' ' << open_to_get.size() << '\n';
 
         open_to_get.erase(open_to_get.begin());
         open_to_find.erase(open_to_find.find({v->i, v->j}));
-        //std::cout << open_to_find.size() << ' ' << open_to_get.size() << '\n';
-
         close.insert({{v->i, v->j}, v});
         if (v->i == map.getFinish().first && v->j == map.getFinish().second) {
             lastnode = v;
@@ -266,26 +260,30 @@ std::pair<Node*, Node*> SeqSearch::searchStep(ILogger *Logger, Map &map, const E
                 // Diagonal
                 if (abs(i) == abs(j)) {
                     if (map.CellOnGrid(v->i + i, v->j + j) &&
-                        map.CellIsTraversable(v->i + i, v->j + j)) {
+                        (map.CellIsTraversable(v->i + i, v->j + j) || !map.CellIsVisible(v->i + i, v->j + j))) {
                         if (!options.allowdiagonal) {
                             continue;
                         }
-                        if (!map.CellOnGrid(v->i, v->j + j) ||
-                            !map.CellIsTraversable(v->i, v->j + j)) {
-                            if (!options.cutcorners) {
-                                continue;
-                            }
-                        }
-                        if (!map.CellOnGrid(v->i + i, v->j) ||
-                            !map.CellIsTraversable(v->i + i, v->j)) {
-                            if (!options.cutcorners) {
-                                continue;
-                            }
-                        }
                         if ((!map.CellOnGrid(v->i, v->j + j) ||
-                             !map.CellIsTraversable(v->i, v->j + j)) &&
-                            (!map.CellOnGrid(v->i + i, v->j) ||
-                             !map.CellIsTraversable(v->i + i, v->j))) {
+                            !map.CellIsTraversable(v->i, v->j + j)) &&
+                            map.CellIsVisible(v->i, v->j + j)) {
+                            if (!options.cutcorners) {
+                                continue;
+                            }
+                        }
+                        if ((!map.CellOnGrid(v->i + i, v->j) ||
+                            !map.CellIsTraversable(v->i + i, v->j)) &&
+                            map.CellIsVisible(v->i + i, v->j)) {
+                            if (!options.cutcorners) {
+                                continue;
+                            }
+                        }
+                        if (((!map.CellOnGrid(v->i, v->j + j) ||
+                              !map.CellIsTraversable(v->i, v->j + j)) &&
+                              map.CellIsVisible(v->i, v->j + j)) &&
+                            ((!map.CellOnGrid(v->i + i, v->j) ||
+                             !map.CellIsTraversable(v->i + i, v->j)) &&
+                             map.CellIsVisible(v->i + i, v->j))) {
                             if (!options.allowsqueeze) {
                                 continue;
                             }
@@ -323,8 +321,8 @@ std::pair<Node*, Node*> SeqSearch::searchStep(ILogger *Logger, Map &map, const E
                         }
                     }
                 } else {
-                    if (map.CellOnGrid(v->i + i, v->j + j) && map.CellIsTraversable(v->i + i, v->j + j)) {
-//                        std::cout << "KEK" << '\n';
+                    if (map.CellOnGrid(v->i + i, v->j + j) && (map.CellIsTraversable(v->i + i, v->j + j) ||
+                        !map.CellIsVisible(v->i + i, v->j + j))) {
                         std::pair<int, int> to_find = {v->i + i, v->j + j};
                         auto f1 = open_to_find.find(to_find);
                         auto f2 = close.find(to_find);
@@ -334,13 +332,9 @@ std::pair<Node*, Node*> SeqSearch::searchStep(ILogger *Logger, Map &map, const E
                                                  map.getFinish().second,
                                                  options);
                             auto neigh = new Node{v->i + i, v->j + j, v->g + 1 + H, v->g + 1, H, v, nullptr};
-                            //std::cout << v->i + i << ' ' << v->j + j << '\n';
-                            //std::cout << open_to_find.size() << ' ' << open_to_get.size() << '\n';
                             v->child = neigh;
                             open_to_find[to_find] = neigh;
                             open_to_get.insert(neigh);
-                            //std::cout << open_to_find.size() << ' ' << open_to_get.size() << '\n';
-
                         } else {
                             if (f2 != close.end()) {
                                 continue;
@@ -365,18 +359,7 @@ std::pair<Node*, Node*> SeqSearch::searchStep(ILogger *Logger, Map &map, const E
         }
     }
     sresult.pathfound = lastnode;
-//    sresult.hppath = &hppath; //Here is a constant pointer
-//    sresult.lppath = &lppath;
     sresult.nodescreated += open_to_get.size() + close.size();
-//    sresult.pathlength = lastnode->g;
-//    auto TEND = std::chrono::system_clock::now();
-//    std::chrono::duration<double> time = (TEND - TBEGIN);
-//    sresult.time = time.count();
-//    makeSecondaryPath();
-//    std::cout << sresult.pathfound << '\n';
-//    std::cout << std::fixed << std::setprecision(8) << sresult.pathlength << '\n';
-//    std::cout << sresult.numberofsteps << '\n';
-//    std::cout << sresult.nodescreated << '\n';
     std::pair<Node*, Node*> to_return;
     to_return.first = begin;
     to_return.second = lastnode;
@@ -425,62 +408,100 @@ void SeqSearch::localClear() {
     close = std::unordered_map<std::pair<int, int>, Node*, MyHash>();
 }
 
+void SeqSearch::ExpandVisibility(Map &map) {
+    for (int i = -map.getVisibility(); i <= map.getVisibility(); ++i) {
+        for (int j = -map.getVisibility(); j <= map.getVisibility(); ++j) {
+            if (map.CellOnGrid(lppath.back().i + i, lppath.back().j + j)) {
+                map.makeVisible(lppath.back().i + i, lppath.back().j + j);
+            }
+        }
+    }
+}
+
+void SeqSearch::PrintInFile(Map& map, std::pair<Node*, Node*> i_path) {
+    std::vector<std::vector<int>> map_with_path;
+    map_with_path.resize(map.getMapHeight());
+    for (int i = 0; i < map.getMapHeight(); ++i) {
+        map_with_path[i].resize(map.getMapWidth());
+    }
+    for (int i = 0; i < map.getMapHeight(); ++i) {
+        for (int j = 0; j < map.getMapWidth(); ++j) {
+            map_with_path[i][j] = map.getValue(i, j);
+        }
+    }
+    Node* end = i_path.second;
+    if (end) {
+        while (end != nullptr) {
+            std::cerr << end->i << ' ' << end->j << '\n';
+            map_with_path[end->i][end->j] = 2;
+            end = end->parent;
+        }
+    } else {
+        for (auto it = lppath.begin(); it != lppath.end(); ++it) {
+            map_with_path[(*it).i][(*it).j] = 2;
+        }
+    }
+    std::ofstream out;          // поток для записи
+    out.open("./out", std::ios_base::app); // окрываем файл для записи
+    for (int i = 0; i < map.getMapHeight(); ++i) {
+        for (int j = 0; j < map.getMapWidth(); ++j) {
+            out << map_with_path[i][j] << ' ';
+        }
+        out << '\n';
+    }
+    out << '\n';
+
+    out.close();
+}
+
+void SeqSearch::NormalizePath() {
+    for (auto it1 = lppath.begin(); it1 != (--lppath.end()); ++it1) {
+        for (auto _ = it1; _ != (--lppath.end()); ++_) {
+            auto it2 = _;
+            ++it2;
+            if (it2->i == it1->i && it2->j == it1->j) {
+                auto to_erase_l = it1;
+                to_erase_l++;
+                lppath.erase(to_erase_l, ++it2);
+                break;
+            }
+        }
+    }
+}
+
 SearchResult SeqSearch::startSeqSearch(ILogger *Logger, Map &map, const EnvironmentOptions &options)
 {
-    for (int i = -10; i <= 10; ++i) {
-        for (int j = -10; j <= 10; ++j) {
-            if (i == 0 && j == 0) {
-                std::cerr << 5 << ' ';
-                continue;
-            }
-            std::cerr << map.CellIsObstacle(254 + i, 173 + j) << ' ';
-        }
-        std::cerr << '\n';
-    }
-
     auto TBEGIN = std::chrono::system_clock::now();
     lppath.push_back(Node{map.getStart().first, map.getStart().second, 0, 0, 0, nullptr, nullptr});
-    std::cerr<<"XDDDDDDDDDDDDDDDD"<<std::endl;
-    int kek = 0;
     while (true) {
-        for (int i = -15; i <= 15; ++i) {
-            for (int j = -15; j <= 15; ++j) {
-                if (i == 0 && j == 0) {
-                    std::cerr << 5 << ' ';
-                    continue;
-                }
-                std::cerr << map.CellIsObstacle(254 + i, 173 + j) << ' ';
-            }
-            std::cerr << '\n';
-        }
-        std::cerr << "\n\n\n";
-        ++kek;
         auto begin_end = searchStep(Logger, map, options, lppath.back());
         if (!begin_end.second) {
-            std::cerr<< "Not found" <<std::endl;
+            std::cerr << "Not found\n" << std::endl;
             localClear();
             return sresult;
         }
-//        std::cerr<< (begin_end.first->child == nullptr) <<std::endl;
-        map.makeObstacle(begin_end.first->i, begin_end.first->j);
-        lppath.push_back(Node(*(begin_end.first->child)));
-        if (begin_end.first->child == begin_end.second) {
+        Node *end = begin_end.second;
+        Node *first = nullptr;
+        Node *second = nullptr;
+        while (end != nullptr) {
+            second = first;
+            first = end;
+            end = end->parent;
+        }
+        if (second) {
+            lppath.emplace_back(Node(*second));
+        } else {
             localClear();
             break;
         }
+        ExpandVisibility(map);
         localClear();
-//        if (kek == 20) {
-//            for (auto it = lppath.begin(); it != lppath.end(); ++it) {
-//                std::cerr << (*it).i << ' ' << (*it).j  << std::endl;
-//            }
-//            std::vector<int> kek;
-//            int x = kek[0];
-//            std::cout << x << '\n';
-//        }
     }
     auto TEND = std::chrono::system_clock::now();
+    NormalizePath();
+    PrintInFile(map, { nullptr, nullptr });
     sresult.lppath = &lppath;
-    sresult.pathlength = lppath.size();
+//    sresult.pathlength = lppath.size();
     std::chrono::duration<double> time = (TEND - TBEGIN);
     sresult.time = time.count();
     return sresult;
