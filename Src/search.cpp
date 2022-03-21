@@ -1,5 +1,218 @@
 #include "search.h"
 
+double DLiteSearch::ComputeHeuristic(int i_current, int j_current,
+                        int i_finish, int j_finish,
+                        const EnvironmentOptions &options) {
+    if (options.metrictype == 2) {
+        return std::sqrt(std::pow(i_current - i_finish, 2) + std::pow(j_current - j_finish, 2));
+    } else if (options.metrictype == 1) {
+        return abs(i_current - i_finish) + abs(j_current - j_finish);
+    } else if (options.metrictype == 3) {
+        return std::max(abs(i_current - i_finish), abs(j_current - j_finish));
+    } else if (options.metrictype == 0){
+        return (std::abs(abs(i_current - i_finish) - abs(j_current - j_finish)) +
+                std::min(abs(i_current - i_finish), abs(j_current - j_finish)));
+    }
+    return 0;
+}
+
+DLiteSearch::DLiteSearch()
+{
+}
+
+DLiteSearch::~DLiteSearch()
+{
+    for (auto& x : close) {
+        delete x.second;
+    }
+}
+
+std::pair<double, double> DLiteSearch::CalculateKey(Node *v)
+{
+    return { std::min(v->g, v->rhs) + v->H, std::min(v->g, v->rhs) };
+}
+
+void DLiteSearch::Initialize(const Map &map, const EnvironmentOptions &options)
+{
+    auto H = ComputeHeuristic(map.getFinish().first,
+                              map.getFinish().second,
+                              map.getStart().first,
+                              map.getStart().second,
+                              options);
+    Node* finish = new Node{ map.getFinish().first, map.getFinish().second, 0, H, H, nullptr, nullptr, 0, {0, 0}};
+    finish->key = CalculateKey(finish);
+    open_to_find[map.getFinish()] = finish;
+    close[map.getFinish()] = finish;
+    open_to_get.insert(finish);
+}
+
+void DLiteSearch::UpdateVertex(Node *v, const Map &map, const EnvironmentOptions &options)
+{
+    double min_rhs = 1e9;
+    if (v->i != map.getFinish().first || v->j != map.getFinish().second) {
+        for (int i = -1; i <= 1; ++i) {
+            for (int j = -1; j <= 1;++j) {
+                if (i == 0 && j == 0) { continue; }
+                if (map.CellOnGrid(v->i + i, v->j + j) &&
+                    (map.CellIsTraversable(v->i + i, v->j + j) || !map.CellIsVisible(v->i + i, v->j + j))) {
+                    if (abs(i) == abs(j)) {
+                        if (!options.allowdiagonal) {
+                            continue;
+                        }
+                        if ((!map.CellOnGrid(v->i, v->j + j) ||
+                             !map.CellIsTraversable(v->i, v->j + j)) &&
+                            map.CellIsVisible(v->i, v->j + j)) {
+                            if (!options.cutcorners) {
+                                continue;
+                            }
+                        }
+                        if ((!map.CellOnGrid(v->i + i, v->j) ||
+                             !map.CellIsTraversable(v->i + i, v->j)) &&
+                            map.CellIsVisible(v->i + i, v->j)) {
+                            if (!options.cutcorners) {
+                                continue;
+                            }
+                        }
+                        if (((!map.CellOnGrid(v->i, v->j + j) ||
+                              !map.CellIsTraversable(v->i, v->j + j)) &&
+                             map.CellIsVisible(v->i, v->j + j)) &&
+                            ((!map.CellOnGrid(v->i + i, v->j) ||
+                              !map.CellIsTraversable(v->i + i, v->j)) &&
+                             map.CellIsVisible(v->i + i, v->j))) {
+                            if (!options.allowsqueeze) {
+                                continue;
+                            }
+                        }
+                    }
+                    std::pair<int, int> to_find = {v->i + i, v->j + j};
+                    auto f = open_to_find.find(to_find);
+                    if (f != open_to_find.end()) {
+                        if (abs(i) == abs(j))
+                            min_rhs = std::min(open_to_find[to_find]->g + CN_SQRT_TWO, min_rhs);
+                        else
+                            min_rhs = std::min(open_to_find[to_find]->g + 1, min_rhs);
+                    }
+                }
+            }
+        }
+    }
+    if (open_to_find.find({ v->i, v->j }) != open_to_find.end()) {
+        open_to_find.erase(open_to_find.find({ v->i, v->j }));
+        open_to_get.erase(v);
+    }
+    v->rhs = min_rhs;
+    v->key = CalculateKey(v);
+    if (v->g != v->rhs) {
+        close[{ v->i, v->j }] = v;
+        open_to_find[{ v->i, v->j }] = v;
+        open_to_get.insert(v);
+    }
+}
+
+bool DLiteSearch::FirstStupidCheck(int i, int j, Node* v) {
+    if (open_to_find.find({i, j}) == open_to_find.end()) {
+        return true;
+    }
+    Node* v_start = open_to_find[{i, j}];
+    return CalculateKey(v) < CalculateKey(v_start);
+}
+
+bool DLiteSearch::SecondStupidCheck(int i, int j) {
+    if (open_to_find.find({i, j}) == open_to_find.end()) {
+        return true;
+    }
+    return open_to_find[{i, j}]->g != open_to_find[{i, j}]->rhs;
+}
+
+void DLiteSearch::ComputeShortestPath(const Map &map, const EnvironmentOptions &options) {
+    while (FirstStupidCheck(map.getStart().first, map.getStart().second, *open_to_get.begin()) ||
+           SecondStupidCheck(map.getStart().first, map.getStart().second)) {
+        Node* v = *open_to_get.begin();
+        auto k_old = v->key;
+        open_to_get.erase(open_to_get.begin());
+        open_to_find.erase({ v->i, v->j });
+        if (k_old < CalculateKey(v)) {
+            v->key = CalculateKey(v);
+            open_to_find[{ v->i, v->j }] = v;
+            open_to_get.insert(v);
+        } else {
+            bool check = v->g > v->rhs;
+            if (check) {
+                v->g = v->rhs;
+            } else {
+                v->g = 1e9;
+            }
+            for (int i = -1; i <= 1; ++i) {
+                for (int j = -1; j <= 1; ++j) {
+                    if (i == 0 && j == 0) { continue; }
+                    if (map.CellOnGrid(v->i + i, v->j + j) &&
+                        (map.CellIsTraversable(v->i + i, v->j + j) || !map.CellIsVisible(v->i + i, v->j + j))) {
+                        if (abs(i) == abs(j)) {
+                            if (!options.allowdiagonal) {
+                                continue;
+                            }
+                            if ((!map.CellOnGrid(v->i, v->j + j) ||
+                                 !map.CellIsTraversable(v->i, v->j + j)) &&
+                                map.CellIsVisible(v->i, v->j + j)) {
+                                if (!options.cutcorners) {
+                                    continue;
+                                }
+                            }
+                            if ((!map.CellOnGrid(v->i + i, v->j) ||
+                                 !map.CellIsTraversable(v->i + i, v->j)) &&
+                                map.CellIsVisible(v->i + i, v->j)) {
+                                if (!options.cutcorners) {
+                                    continue;
+                                }
+                            }
+                            if (((!map.CellOnGrid(v->i, v->j + j) ||
+                                  !map.CellIsTraversable(v->i, v->j + j)) &&
+                                 map.CellIsVisible(v->i, v->j + j)) &&
+                                ((!map.CellOnGrid(v->i + i, v->j) ||
+                                  !map.CellIsTraversable(v->i + i, v->j)) &&
+                                 map.CellIsVisible(v->i + i, v->j))) {
+                                if (!options.allowsqueeze) {
+                                    continue;
+                                }
+                            }
+                        }
+                        std::pair<int, int> to_find = {v->i + i, v->j + j};
+                        auto f = open_to_find.find(to_find);
+                        if (f != open_to_find.end()) {
+                            UpdateVertex(f->second, map, options);
+                        } else {
+                            double H = ComputeHeuristic(v->i + i, v->j + j,
+                                                        map.getStart().first,
+                                                        map.getStart().second,
+                                                        options);
+                            Node* new_node = new Node{v->i + i, v->j + j, -1, 1e9, H, v, nullptr, 1e9, {-1, -1}};
+                            UpdateVertex(new_node, map, options);
+                        }
+                    }
+                }
+            }
+            if (!check) {
+                UpdateVertex(v, map, options);
+            }
+        }
+    }
+}
+
+SearchResult DLiteSearch::StartDLiteSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options) {
+    Initialize(Map, options);
+    ComputeShortestPath(Map, options);
+    if (close.find(Map.getStart()) == close.end() ||
+            close[Map.getStart()]->g == 1e9) {
+        return SearchResult(); // not found;
+    }
+    Node* start = close[Map.getStart()];
+    Node* last = start;
+    while (std::pair<int, int>(start->i, start->j) != Map.getFinish()) {
+        ComputeShortestPath(Map, options);
+    }
+    return  SearchResult();
+}
+
 Search::Search()
 {
 //set defaults here
@@ -15,8 +228,8 @@ Search::~Search() {
 }
 
 double Search::ComputeHeuristic(int i_current, int j_current,
-                                int i_finish, int j_finish,
-                                const EnvironmentOptions &options) {
+                                     int i_finish, int j_finish,
+                                     const EnvironmentOptions &options) {
     if (options.metrictype == 2) {
         return std::sqrt(std::pow(i_current - i_finish, 2) + std::pow(j_current - j_finish, 2));
     } else if (options.metrictype == 1) {
@@ -25,10 +238,11 @@ double Search::ComputeHeuristic(int i_current, int j_current,
         return std::max(abs(i_current - i_finish), abs(j_current - j_finish));
     } else if (options.metrictype == 0){
         return (std::abs(abs(i_current - i_finish) - abs(j_current - j_finish)) +
-        std::min(abs(i_current - i_finish), abs(j_current - j_finish)));
+                std::min(abs(i_current - i_finish), abs(j_current - j_finish)));
     }
     return 0;
 }
+
 SearchResult Search::startSearch(ILogger *Logger, const Map &map, const EnvironmentOptions &options)
 {
 //    std::cout << map.getStart().first << ' ' << map.getStart().second << '\n';
@@ -206,19 +420,17 @@ void Search::makeSecondaryPath() {
     }
 }
 
-#include "seqsearch.h"
 
 SeqSearch::SeqSearch()
 {
-//set defaults here
 }
 
 SeqSearch::~SeqSearch() {
 }
 
 double SeqSearch::ComputeHeuristic(int i_current, int j_current,
-                                   int i_finish, int j_finish,
-                                   const EnvironmentOptions &options) {
+                                int i_finish, int j_finish,
+                                const EnvironmentOptions &options) {
     if (options.metrictype == 2) {
         return std::sqrt(std::pow(i_current - i_finish, 2) + std::pow(j_current - j_finish, 2));
     } else if (options.metrictype == 1) {
@@ -231,6 +443,7 @@ double SeqSearch::ComputeHeuristic(int i_current, int j_current,
     }
     return 0;
 }
+
 std::pair<Node*, Node*> SeqSearch::searchStep(ILogger *Logger, Map &map, const EnvironmentOptions &options,
                                               Node startNode)
 {

@@ -28,6 +28,18 @@ struct Comparator {
     }
 };
 
+struct DLiteComparator {
+    bool operator() (const Node* a, const Node* b) const {
+        if (a->key == b->key) {
+            if (a->i == b->i) {
+                return a->j < b->j;
+            }
+            return a->i < b->i;
+        }
+        return a->key < b->key;
+    }
+};
+
 struct MyHash {
     std::size_t operator()(const std::pair<int, int> &x) const {
         return std::hash<int>()(x.first) ^ std::hash<int>()(x.second);
@@ -51,20 +63,6 @@ class Search
         void makeSecondaryPath();
 
     protected:
-        //CODE HERE
-
-        //Hint 1. You definitely need class variables for OPEN and CLOSE
-
-        //Hint 2. It's a good idea to define a heuristic calculation function, that will simply return 0
-        //for non-heuristic search methods like Dijkstra
-
-        //Hint 3. It's a good idea to define function that given a node (and other stuff needed)
-        //will return it's successors, e.g. unordered list of nodes
-
-        //Hint 4. working with OPEN and CLOSE is the core
-        //so think of the data structures that needed to be used, about the wrap-up classes (if needed)
-        //Start with very simple (and ineffective) structures like list or vector and make it work first
-        //and only then begin enhancement!
         std::set<Node*, Comparator>     open_to_get;
         std::set<Node*>                 open_to_get_all;
         std::unordered_map<std::pair<int, int>, Node*, MyHash>  open_to_find;
@@ -72,7 +70,6 @@ class Search
         SearchResult                                            sresult; //This will store the search result
         std::list<Node>                                         lppath, hppath;
 
-        //CODE HERE to define other members of the class
 };
 
 class SeqSearch
@@ -97,26 +94,40 @@ public:
     void NormalizePath();
 
 protected:
-    //CODE HERE
-
-    //Hint 1. You definitely need class variables for OPEN and CLOSE
-
-    //Hint 2. It's a good idea to define a heuristic calculation function, that will simply return 0
-    //for non-heuristic search methods like Dijkstra
-
-    //Hint 3. It's a good idea to define function that given a node (and other stuff needed)
-    //will return it's successors, e.g. unordered list of nodes
-
-    //Hint 4. working with OPEN and CLOSE is the core
-    //so think of the data structures that needed to be used, about the wrap-up classes (if needed)
-    //Start with very simple (and ineffective) structures like list or vector and make it work first
-    //and only then begin enhancement!
     std::set<Node*, Comparator>                             open_to_get;
     std::unordered_map<std::pair<int, int>, Node*, MyHash>  open_to_find;
     std::unordered_map<std::pair<int, int>, Node*, MyHash>  close;
     SearchResult                                            sresult; //This will store the search result
     std::list<Node>                                         lppath, hppath;
+};
 
-    //CODE HERE to define other members of the class
+class DLiteSearch
+{
+    DLiteSearch();
+    ~DLiteSearch(void);
+
+    SearchResult StartDLiteSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options);
+
+    double ComputeHeuristic(int i_current, int j_current,
+                     int i_finish, int j_finish,
+                     const EnvironmentOptions &options);
+
+    bool FirstStupidCheck(int i, int j, Node* v);
+
+    bool SecondStupidCheck(int i, int j);
+
+    void ComputeShortestPath(const Map &map, const EnvironmentOptions &options);
+
+    void UpdateVertex(Node* v,  const Map &map, const EnvironmentOptions &options);
+
+    void Initialize(const Map &map, const EnvironmentOptions &options);
+
+    std::pair<double, double> CalculateKey(Node* v);
+
+    std::set<Node*, DLiteComparator>                        open_to_get;
+    std::unordered_map<std::pair<int, int>, Node*, MyHash>  open_to_find;
+    std::unordered_map<std::pair<int, int>, Node*, MyHash>  close;
+    SearchResult                                            sresult; //This will store the search result
+    std::list<Node>                                         lppath, hppath;
 };
 #endif
