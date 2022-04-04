@@ -19,6 +19,7 @@
         #define CNS_TAG_STY         "starty"
         #define CNS_TAG_FINX        "finishx"
         #define CNS_TAG_FINY        "finishy"
+        #define CNS_TAG_VISIBILITY  "visibility"
         #define CNS_TAG_GRID        "grid"
             #define CNS_TAG_ROW     "row"
 

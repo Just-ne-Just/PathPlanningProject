@@ -12,7 +12,7 @@ Map::Map()
     Grid = nullptr;
     VisibleGrid = nullptr;
     cellSize = 1;
-    visibility = 50;
+    visibility = 5;
 }
 
 Map::~Map()
@@ -73,7 +73,7 @@ bool Map::getMap(const char *FileName)
     std::string value;
     std::stringstream stream;
 
-    bool hasGridMem = false, hasGrid = false, hasHeight = false, hasWidth = false, hasSTX = false, hasSTY = false, hasFINX = false, hasFINY = false, hasCellSize = false;
+    bool hasGridMem = false, hasGrid = false, hasHeight = false, hasWidth = false, hasSTX = false, hasSTY = false, hasFINX = false, hasFINY = false, hasCellSize = false, hasVisibility = false;
 
     tinyxml2::XMLDocument doc;
 
@@ -269,6 +269,25 @@ bool Map::getMap(const char *FileName)
                 }
                 else
                     hasFINY = true;
+            }
+        }
+        else if (value == CNS_TAG_VISIBILITY) {
+            if (hasVisibility) {
+                std::cout << "Warning! Duplicate '" << CNS_TAG_VISIBILITY << "' encountered." << std::endl;
+                std::cout << "Only first value of '" << CNS_TAG_VISIBILITY << "' =" << visibility << "will be used."
+                          << std::endl;
+            }
+            else {
+                if (!((stream >> visibility) && (visibility > 0))) {
+                    std::cout << "Warning! Invalid value of '" << CNS_TAG_VISIBILITY
+                              << "' tag encountered (or could not convert to double)." << std::endl;
+                    std::cout << "Value of '" << CNS_TAG_VISIBILITY
+                              << "' tag should be double AND >0. By default it is defined to '5'" << std::endl;
+                    std::cout << "Continue reading XML and hope correct value of '" << CNS_TAG_VISIBILITY
+                              << "' tag will be encountered later..." << std::endl;
+                }
+                else
+                    hasVisibility = true;
             }
         }
         else if (value == CNS_TAG_GRID) {

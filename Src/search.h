@@ -112,17 +112,21 @@ class DLiteSearch
                      int i_finish, int j_finish,
                      const EnvironmentOptions &options);
 
-    bool FirstStupidCheck(int i, int j, Node* v);
+    bool FirstStupidCheck(int i, int j, Node* v, double k);
 
     bool SecondStupidCheck(int i, int j);
 
-    void ComputeShortestPath(const Map &map, const EnvironmentOptions &options);
+    void ComputeShortestPath(const Map &map, const EnvironmentOptions &options, double k);
 
-    void UpdateVertex(Node* v,  const Map &map, const EnvironmentOptions &options);
+    void UpdateVertex(Node* v,  const Map &map, const EnvironmentOptions &options, double k);
 
     void Initialize(const Map &map, const EnvironmentOptions &options);
 
-    std::pair<double, double> CalculateKey(Node* v);
+    Node* Argmin(const Node* v, const Map &map, const EnvironmentOptions &options);
+
+    std::pair<double, double> CalculateKey(Node* v, double k);
+
+    std::vector<std::pair<int, int>> ExpandVisibility(Map &map);
 
     std::set<Node*, DLiteComparator>                        open_to_get;
     std::unordered_map<std::pair<int, int>, Node*, MyHash>  open_to_find;
