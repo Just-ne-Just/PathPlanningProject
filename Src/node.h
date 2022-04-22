@@ -15,4 +15,34 @@ struct Node
     std::pair<double, double> key;
 };
 
+struct DLiteNode {
+    int i = 0;
+    int j = 0;
+    std::pair<double, double> key = { 0, 0 };
+    double H = 1e9;
+    double g = 1e9;
+    double rhs = 1e9;
+    int cost = 1e9;
+
+    DLiteNode() = default;
+
+    DLiteNode(int other_i, int other_j, std::pair<double, double> other_key) {
+        i = other_i;
+        j = other_j;
+        key = other_key;
+    }
+
+    DLiteNode(const DLiteNode& other) {
+        i = other.i;
+        this->j = other.j;
+        this->key = other.key;
+    }
+
+    bool operator< (const DLiteNode& other) {
+        if (key != other.key)
+            return key < other.key;
+        return i < other.j;
+    }
+};
+
 #endif

@@ -40,7 +40,6 @@ int main(int argc, char* argv[])
         std::cerr<<"Log chanel has not been created! Program halted!"<<std::endl;
         return -1;
     }
-
     mission.createEnvironmentOptions();
     mission.createSearch();
     mission.startSeqSearch();

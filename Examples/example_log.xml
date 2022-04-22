@@ -8,6 +8,7 @@
         <starty>20</starty>
         <finishx>12</finishx>
         <finishy>7</finishy>
+        <visibility>5</visibility>
         <grid>
             <row>0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</row>
             <row>0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</row>
@@ -52,7 +53,7 @@
     </options>
     <log>
         <mapfilename>../../Examples/example.xml</mapfilename>
-        <summary numberofsteps="495" nodescreated="495" length="0" length_scaled="0" time="0.009890"/>
+        <summary numberofsteps="0" nodescreated="0" length="0" length_scaled="0" time="0.000000"/>
         <path>Path NOT found!</path>
         <lplevel/>
         <hplevel/>

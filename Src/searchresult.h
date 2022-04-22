@@ -43,6 +43,8 @@ struct SearchResult
             nodescreated = 0;
             numberofsteps = 0;
             time = 0;
+            lppath = nullptr;
+            hppath = nullptr;
         }
 
 };

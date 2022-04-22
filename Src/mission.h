@@ -31,6 +31,7 @@ class Mission
         void createEnvironmentOptions();
         void startSearch();
         void startSeqSearch();
+        void startDLiteSearch();
         void printSearchResultsToConsole();
         void saveSearchResultsToLog();
         SearchResult getSearchResult();
@@ -41,6 +42,7 @@ class Mission
         EnvironmentOptions      options;
         Search                  search;
         SeqSearch               seqsearch;
+        DLiteSearch             dlitesearch;
         ILogger*                logger;
         const char*             fileName;
         SearchResult            sr;

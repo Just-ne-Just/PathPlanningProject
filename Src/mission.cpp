@@ -57,7 +57,10 @@ void Mission::startSearch()
 
 void Mission::startSeqSearch() {
     sr = seqsearch.startSeqSearch(logger, map, options);
-    std::cerr << map.getVisibility() << "\n\n\n\n\n\n\n";
+}
+
+void Mission::startDLiteSearch() {
+    sr = dlitesearch.StartDLiteSearch(logger, map, options);
 }
 
 void Mission::printSearchResultsToConsole()

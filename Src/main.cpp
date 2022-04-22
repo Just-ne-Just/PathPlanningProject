@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 
                 mission.createEnvironmentOptions();
                 mission.createSearch();
-                mission.startSeqSearch();
+                mission.startDLiteSearch();
 
                 std::cout<<"Search is finished!"<<std::endl;
 
