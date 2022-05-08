@@ -501,8 +501,7 @@ Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o: ../../Src/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/filesystem \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque \
-  ../../Src/xmllogger.h \
-  ../../Src/seqsearch.h
+  ../../Src/xmllogger.h
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.o: ../../Src/map.cpp \
   ../../Src/map.h \
@@ -1000,8 +999,7 @@ Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o: ../../Src/mission.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/filesystem \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque \
-  ../../Src/xmllogger.h \
-  ../../Src/seqsearch.h
+  ../../Src/xmllogger.h
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o: ../../Src/search.cpp \
   ../../Src/search.h \
@@ -1696,8 +1694,6 @@ Src/CMakeFiles/Andrew_Semakov_ASearch.dir/xmllogger.cpp.o: ../../Src/xmllogger.c
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_set.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_setsize.h:
-
-../../Src/seqsearch.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_errno_t.h:
 

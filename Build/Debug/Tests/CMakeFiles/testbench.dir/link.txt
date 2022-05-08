@@ -1,1 +1,1 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -std=c++11 -O2 -Wall -Wextra -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/testbench.dir/testbench.cpp.o -o testbench  ../Src/libPPLIB.a 
+/Library/Developer/CommandLineTools/usr/bin/c++  -std=c++17 -O2 -Wall -Wextra -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/testbench.dir/testbench.cpp.o -o testbench  ../Src/libPPLIB.a 

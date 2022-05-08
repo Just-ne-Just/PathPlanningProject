@@ -31,6 +31,26 @@ void DLiteSearch::NormalizePath() {
     }
 }
 
+void DLiteSearch::makeSecondaryPath() {
+    if (lppath.empty()) { return; }
+    hppath.push_back(*lppath.begin());
+    int direction1 = 0;
+    int direction2 = 0;
+    for (auto it = ++lppath.begin(); it != lppath.end(); ++it) {
+        auto helpIt1 = it;
+        auto helpIt2 = --it;
+        ++it;
+        if (helpIt1->i - helpIt2->i != direction1 || helpIt1->j - helpIt2->j != direction2) {
+            direction1 = helpIt1->i - helpIt2->i;
+            direction2 = helpIt1->j - helpIt2->j;
+            hppath.push_back(*it);
+        } else {
+            hppath.pop_back();
+            hppath.push_back(*it);
+        }
+    }
+}
+
 DLiteSearch::DLiteSearch()
 {
 }
@@ -47,8 +67,18 @@ void PrintSet(const std::set<DLiteNode, DLiteComparator>& x) {
     std::cout << "========\n";
 }
 
-SearchResult DLiteSearch::StartDLiteSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options) {
+double CalculatePathLength(const std::list<DLiteNode>& path) {
+    double answer = 0;
 
+    for (auto it = path.begin(); it != --path.end(); ++it) {
+        auto it1 = it;
+        answer += ((abs(it->i - (++it1)->i) + abs(it->j - (++(--it1))->j)) == 2 ? CN_SQRT_TWO : 1);
+    }
+    return answer;
+}
+
+DLiteSearchResult DLiteSearch::StartDLiteSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options) {
+    auto TBEGIN = std::chrono::system_clock::now();
     s_start.i = Map.getStart().first;
     s_start.j = Map.getStart().second;
     s_goal.i = Map.getFinish().first;
@@ -64,23 +94,20 @@ SearchResult DLiteSearch::StartDLiteSearch(ILogger *Logger, Map &Map, const Envi
     MyHash hash;
     CreatedNodes[s_goal] = hash(s_goal);
     CreatedNodes[s_start] = hash(s_start);
+    sresult.nodescreated += 2;
+    auto to_answer = s_start;
 
     bool running = true;
     if (!ComputeShortestPath(Map, options)) {
-        std::cout << "GOVNO6\n\n\n\n";
-        return SearchResult();
+        return DLiteSearchResult();
     }
 
     while (s_start != s_goal) {
-        auto TBEGIN = std::chrono::system_clock::now();
 //        PrintSet(open_to_get);
-        std::cout << "===============\n";
-        std::cout << s_start.i << ' ' << s_start.j << ' ' << NodesParam[s_goal].g << ' ' << NodesParam[s_goal].rhs << '\n';
-        std::cout << "===============\n";
         auto min_val = GetMinNeigh(s_start, Map, options);
         lppath.push_back(s_start);
         if (min_val.first.i == -1) {
-            return SearchResult();
+            return DLiteSearchResult();
         } else {
             s_start = min_val.first;
         }
@@ -114,8 +141,7 @@ SearchResult DLiteSearch::StartDLiteSearch(ILogger *Logger, Map &Map, const Envi
                                 open_to_find[node] = nullptr;
                             }
                             if  (node == s_start) {
-                                std::cout << "GOVNO5\n\n\n\n";
-                                return SearchResult();
+                                return DLiteSearchResult();
                             }
                         } else {
                             NodesParam[node].rhs = min_val1.second;
@@ -127,20 +153,28 @@ SearchResult DLiteSearch::StartDLiteSearch(ILogger *Logger, Map &Map, const Envi
             }
         }
         if (ComputeShortestPath(Map, options)) {
-            auto TEND = std::chrono::system_clock::now();
-            std::cout << (TEND - TBEGIN).count() << '\n';
             continue;
         } else {
             if (open_to_get.begin()->key == std::pair<double, double>(std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity())) {
-                std::cout << "GOVNO3\n\n\n\n";
-                return SearchResult();
+                return DLiteSearchResult();
             }
         }
     }
-    std::cout << "OK\n\n\n\n";
+    lppath.push_back(s_goal);
+    std::cout << "\n";
     NormalizePath();
     PrintInFile(Map, {nullptr, nullptr});
-    return SearchResult();
+    sresult.pathfound = true;
+    sresult.nodescreated = CreatedNodes.size();
+    sresult.memory = sresult.nodescreated * sizeof(s_start);
+    sresult.lppath = &lppath;
+    makeSecondaryPath();
+    sresult.hppath = &hppath;
+    sresult.pathlength = CalculatePathLength(lppath);
+    auto TEND = std::chrono::system_clock::now();
+    std::chrono::duration<double> time = (TEND - TBEGIN);
+    sresult.time = time.count();
+    return sresult;
 }
 
 std::pair<double, double> DLiteSearch::CalculateKey(const DLiteNode& v, const Map& map, const EnvironmentOptions& options)
@@ -182,13 +216,13 @@ void DLiteSearch::UpdateVertex(DLiteNode& v, const Map &map, const EnvironmentOp
 int DLiteSearch::ComputeShortestPath(const Map &map, const EnvironmentOptions &options) {
     std::list<DLiteNode> local_neigh;
 //    if (open_to_get.empty()) {
-//        std::cout << "GOVNO2\n\n\n\n";
 //        return 1;
 //    }
 //    auto TBEGIN = std::chrono::system_clock::now();
 
     int c = 0;
     while ((!open_to_get.empty()) && ((open_to_get.begin()->key < CalculateKey(s_start, map, options)) || (NodesParam[s_start].rhs != NodesParam[s_start].g))) {
+        sresult.numberofsteps++;
         DLiteNode v = *open_to_get.begin();
         auto old_k = v.key;
         auto new_k = CalculateKey(v, map, options);
@@ -237,7 +271,6 @@ int DLiteSearch::ComputeShortestPath(const Map &map, const EnvironmentOptions &o
     if (NodesParam[s_start].rhs != std::numeric_limits<double>::infinity()) {
         return true;
     } else {
-        std::cout << "GOVNO1\n\n\n\n";
         return false;
     }
     return false;

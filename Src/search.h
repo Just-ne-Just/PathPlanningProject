@@ -114,7 +114,7 @@ public:
     DLiteSearch();
     ~DLiteSearch(void);
 
-    SearchResult StartDLiteSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options);
+    DLiteSearchResult StartDLiteSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options);
 
 
     double ComputeHeuristic(int i_current, int j_current,
@@ -177,6 +177,7 @@ public:
                         NodesParam[new_node].rhs = std::numeric_limits<double>::infinity();
                         MyHash hash;
                         CreatedNodes[new_node] = hash(new_node);
+                        sresult.nodescreated++;
                     }
                     to_return.push_back(new_node);
                 }
@@ -251,6 +252,8 @@ public:
         }
     }
 
+    void makeSecondaryPath();
+
 protected:
 
     struct NodeInfo {
@@ -274,7 +277,7 @@ protected:
     std::unordered_map<DLiteNode, double, MyHash>                CreatedNodes;
     std::unordered_map<DLiteNode, NodeInfo, MyHash>              NodesParam;
     std::unordered_map<DLiteNode, DLiteNode, MyHash>             NodesParent;
-    SearchResult                                                 sresult; //This will store the search result
+    DLiteSearchResult                                                 sresult; //This will store the search result
     std::list<DLiteNode>                                         lppath, hppath;
 };
 #endif

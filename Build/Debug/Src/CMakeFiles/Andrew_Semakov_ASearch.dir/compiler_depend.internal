@@ -505,7 +505,6 @@ Src/CMakeFiles/Andrew_Semakov_ASearch.dir/main.cpp.o
  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stack
  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque
  /Users/drewsemakov/PathPlanningProject/Src/xmllogger.h
- /Users/drewsemakov/PathPlanningProject/Src/seqsearch.h
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/map.cpp.o
  /Users/drewsemakov/PathPlanningProject/Src/map.cpp
@@ -1006,7 +1005,6 @@ Src/CMakeFiles/Andrew_Semakov_ASearch.dir/mission.cpp.o
  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stack
  /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque
  /Users/drewsemakov/PathPlanningProject/Src/xmllogger.h
- /Users/drewsemakov/PathPlanningProject/Src/seqsearch.h
 
 Src/CMakeFiles/Andrew_Semakov_ASearch.dir/search.cpp.o
  /Users/drewsemakov/PathPlanningProject/Src/search.cpp

@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     mission.createEnvironmentOptions();
     mission.createSearch();
     mission.startDLiteSearch();
-    SearchResult result = mission.getSearchResult();
+    DLiteSearchResult result = mission.getSearchResult();
 
     
     if(abs(len - result.pathlength) > EPS)

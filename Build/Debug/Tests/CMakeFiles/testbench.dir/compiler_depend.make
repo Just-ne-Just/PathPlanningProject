@@ -260,8 +260,7 @@ Tests/CMakeFiles/testbench.dir/testbench.cpp.o: ../../Tests/testbench.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/filesystem \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque \
-  ../../Src/xmllogger.h \
-  ../../Src/seqsearch.h
+  ../../Src/xmllogger.h
 
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque:
@@ -319,8 +318,6 @@ Tests/CMakeFiles/testbench.dir/testbench.cpp.o: ../../Tests/testbench.cpp \
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_set.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_fd_setsize.h:
-
-../../Src/seqsearch.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_errno_t.h:
 

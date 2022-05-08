@@ -60,38 +60,38 @@ void Mission::startSeqSearch() {
 }
 
 void Mission::startDLiteSearch() {
-    sr = dlitesearch.StartDLiteSearch(logger, map, options);
+    dsr = dlitesearch.StartDLiteSearch(logger, map, options);
 }
 
 void Mission::printSearchResultsToConsole()
 {
     std::cout << "Path ";
-    if (!sr.pathfound)
+    if (!dsr.pathfound)
         std::cout << "NOT ";
     std::cout << "found!" << std::endl;
-    std::cout << "numberofsteps=" << sr.numberofsteps << std::endl;
-    std::cout << "nodescreated=" << sr.nodescreated << std::endl;
-    if (sr.pathfound) {
-        std::cout << "pathlength=" << sr.pathlength << std::endl;
-        std::cout << "pathlength_scaled=" << sr.pathlength * map.getCellSize() << std::endl;
+    std::cout << "numberofsteps=" << dsr.numberofsteps << std::endl;
+    std::cout << "nodescreated=" << dsr.nodescreated << std::endl;
+    if (dsr.pathfound) {
+        std::cout << "pathlength=" << dsr.pathlength << std::endl;
+        std::cout << "pathlength_scaled=" << dsr.pathlength * map.getCellSize() << std::endl;
     }
-    std::cout << "time=" << sr.time << std::endl;
+    std::cout << "time=" << dsr.time << std::endl;
 }
 
 void Mission::saveSearchResultsToLog()
 {
-    logger->writeToLogSummary(sr.numberofsteps, sr.nodescreated, sr.pathlength, sr.time, map.getCellSize());
-    if (sr.pathfound) {
-        logger->writeToLogPath(*sr.lppath);
-        logger->writeToLogHPpath(*sr.hppath);
-        logger->writeToLogMap(map, *sr.lppath);
+    logger->writeToLogSummary(dsr.numberofsteps, dsr.nodescreated, dsr.pathlength, dsr.time, map.getCellSize(), dsr.memory);
+    if (dsr.pathfound) {
+        logger->writeToLogPath(*dsr.lppath);
+        logger->writeToLogHPpath(*dsr.hppath);
+        logger->writeToLogMap(map, *dsr.lppath);
     } else
         logger->writeToLogNotFound();
     logger->saveLog();
 }
 
-SearchResult Mission::getSearchResult()
+DLiteSearchResult Mission::getSearchResult()
 {
-    return sr;
+    return dsr;
 }
 

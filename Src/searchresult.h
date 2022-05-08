@@ -49,4 +49,34 @@ struct SearchResult
 
 };
 
+struct DLiteSearchResult
+{
+    bool pathfound;
+    double pathlength; //if path not found, then pathlength=0
+    const std::list<DLiteNode>* lppath; //path as the sequence of adjacent nodes (see above)
+    //This is a pointer to the list of nodes that is actually created and hadled by Search class,
+    //so no need to re-create them, delete them etc. It's just a trick to save some memory
+    const std::list<DLiteNode>* hppath; //path as the sequence of non-adjacent nodes: "sections" (see above)
+    //This is a pointer to the list of nodes that is actually created and hadled by Search class,
+    //so no need to re-create them, delete them etc. It's just a trick to save some memory
+    unsigned int nodescreated; //|OPEN| + |CLOSE| = total number of nodes saved in memory during search process.
+    unsigned int numberofsteps; //number of iterations made by algorithm to find a solution
+    double time; //runtime of the search algorithm (expanding nodes + reconstructing the path)
+    unsigned int memory;
+    DLiteSearchResult()
+    {
+        pathfound = false;
+        pathlength = 0;
+        lppath = nullptr;
+        hppath = nullptr;
+        nodescreated = 0;
+        numberofsteps = 0;
+        time = 0;
+        lppath = nullptr;
+        hppath = nullptr;
+        memory = 0;
+    }
+
+};
+
 #endif

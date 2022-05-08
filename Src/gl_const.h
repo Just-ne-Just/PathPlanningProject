@@ -56,6 +56,7 @@
     #define CNS_TAG_ATTR_LENGTH         "length"
     #define CNS_TAG_ATTR_LENGTH_SCALED  "length_scaled"
     #define CNS_TAG_ATTR_TIME           "time"
+    #define CNS_TAG_ATTR_MEMORY         "memory_used"
     #define CNS_TAG_ATTR_X              "x"
     #define CNS_TAG_ATTR_Y              "y"
     #define CNS_TAG_ATTR_NUM            "number"

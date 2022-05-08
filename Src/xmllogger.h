@@ -18,17 +18,17 @@ public:
 
     void saveLog();
 
-    void writeToLogMap(const Map &Map, const std::list<Node> &path);
+    void writeToLogMap(const Map &Map, const std::list<DLiteNode> &path);
 
     //void writeToLogOpenClose(const typename &open, const typename &close);
 
-    void writeToLogPath(const std::list<Node> &path);
+    void writeToLogPath(const std::list<DLiteNode> &path);
 
-    void writeToLogHPpath(const std::list<Node> &hppath);
+    void writeToLogHPpath(const std::list<DLiteNode> &hppath);
 
     void writeToLogNotFound();
 
-    void writeToLogSummary(unsigned int numberofsteps, unsigned int nodescreated, float length, double time, double cellSize);
+    void writeToLogSummary(unsigned int numberofsteps, unsigned int nodescreated, float length, double time, double cellSize, unsigned int memory);
 
 private:
     std::string LogFileName;

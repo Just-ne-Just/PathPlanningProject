@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = 
 
-CXX_FLAGS =  -std=c++11 -O2 -Wall -Wextra -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
+CXX_FLAGS =  -std=c++17 -O2 -Wall -Wextra -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
 

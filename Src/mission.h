@@ -9,7 +9,6 @@
 #include "environmentoptions.h"
 #include "search.h"
 #include "xmllogger.h"
-#include "seqsearch.h"
 
 //That's the wrap up class that first creates all the needed objects (Map, Search etc.)
 //and then runs the search and then cleans everything up.
@@ -34,7 +33,7 @@ class Mission
         void startDLiteSearch();
         void printSearchResultsToConsole();
         void saveSearchResultsToLog();
-        SearchResult getSearchResult();
+        DLiteSearchResult getSearchResult();
         
     private:
         Map                     map;
@@ -46,6 +45,7 @@ class Mission
         ILogger*                logger;
         const char*             fileName;
         SearchResult            sr;
+        DLiteSearchResult       dsr;
 };
 
 #endif

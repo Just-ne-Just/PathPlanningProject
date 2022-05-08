@@ -42,7 +42,7 @@
         <metrictype>euclid</metrictype>
         <breakingties>g-max</breakingties>
         <hweight>1</hweight>
-        <allowdiagonal>0</allowdiagonal>
+        <allowdiagonal>1</allowdiagonal>
         <cutcorners>1</cutcorners>
         <allowsqueeze>1</allowsqueeze>
     </algorithm>

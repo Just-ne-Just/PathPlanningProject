@@ -38,7 +38,7 @@
     </options>
     <log>
         <mapfilename>../../Examples/Simple1.xml</mapfilename>
-        <summary numberofsteps="0" nodescreated="0" length="0" length_scaled="0" time="0.000000"/>
+        <summary numberofsteps="100" nodescreated="82" length="18.242641" length_scaled="18.242641448974609" time="0.000822"/>
         <path>Path NOT found!</path>
         <lplevel/>
         <hplevel/>
