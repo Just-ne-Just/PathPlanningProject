@@ -51,6 +51,16 @@ void Map::makeTraversable(int i, int j)
     Grid[i][j] = CN_GC_NOOBS;
 }
 
+void Map::setStart(int i, int j) {
+    start_i = i;
+    start_j = j;
+}
+
+void Map::setFinish(int i, int j) {
+    goal_i = i;
+    goal_j = j;
+}
+
 void Map::makeVisible(int i, int j) {
     VisibleGrid[i][j] = 1;
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <map>
+        <width>12</width>
+        <height>10</height>
+        <cellsize>1</cellsize>
+        <startx>0</startx>
+        <starty>0</starty>
+        <finishx>2</finishx>
+        <finishy>9</finishy>
+        <visibility>5</visibility>
+        <grid>
+            <row>0 0 0 0 0 0 0 1 1 1 1 1</row>
+            <row>0 0 0 0 0 0 0 1 1 1 1 1</row>
+            <row>0 0 0 0 0 0 0 1 1 1 1 1</row>
+            <row>0 1 1 1 1 1 0 1 1 1 1 1</row>
+            <row>0 1 1 1 1 1 0 1 1 1 1 1</row>
+            <row>0 1 1 1 1 1 0 1 1 1 1 1</row>
+            <row>0 1 1 1 1 1 0 1 1 1 1 1</row>
+            <row>0 1 1 1 1 1 0 1 1 1 1 1</row>
+            <row>0 1 1 1 1 1 0 1 1 1 1 1</row>
+            <row>0 1 0 0 0 0 0 1 1 1 1 1</row>
+        </grid>
+    </map>
+    <algorithm>
+        <searchtype>astar</searchtype>
+        <metrictype>euclid</metrictype>
+        <breakingties>g-max</breakingties>
+        <hweight>1</hweight>
+        <allowdiagonal>1</allowdiagonal>
+        <cutcorners>1</cutcorners>
+        <allowsqueeze>1</allowsqueeze>
+    </algorithm>
+    <options>
+        <loglevel>1</loglevel>
+        <logpath/>
+        <logfilename/>
+    </options>
+    <log>
+        <mapfilename>../../Examples/Simple1.xml</mapfilename>
+        <summary numberofsteps="0" nodescreated="0" length="0" length_scaled="0" time="0.000000"/>
+        <path>Path NOT found!</path>
+        <lplevel/>
+        <hplevel/>
+    </log>
+</root>

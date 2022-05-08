@@ -16,177 +16,250 @@ double DLiteSearch::ComputeHeuristic(int i_current, int j_current,
     return 0;
 }
 
+void DLiteSearch::NormalizePath() {
+    for (auto it1 = lppath.begin(); it1 != (--lppath.end()); ++it1) {
+        for (auto _ = it1; _ != (--lppath.end()); ++_) {
+            auto it2 = _;
+            ++it2;
+            if (it2->i == it1->i && it2->j == it1->j) {
+                auto to_erase_l = it1;
+                to_erase_l++;
+                lppath.erase(to_erase_l, ++it2);
+                break;
+            }
+        }
+    }
+}
+
 DLiteSearch::DLiteSearch()
 {
 }
 
 DLiteSearch::~DLiteSearch()
 {
-    for (auto& x : close) {
-        delete x.second;
+}
+
+void PrintSet(const std::set<DLiteNode, DLiteComparator>& x) {
+    for (const auto& y : x) {
+        std::cout << "COORD " << y.i << ' ' << y.j << '\n';
+        std::cout << "KEY " << y.key.first << ' ' << y.key.second << '\n';
     }
+    std::cout << "========\n";
 }
 
-std::pair<double, double> DLiteSearch::CalculateKey(DLiteNode *v, double k)
-{
-    return { std::min(v->g, v->rhs) + v->H + k, std::min(v->g, v->rhs) };
-}
+SearchResult DLiteSearch::StartDLiteSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options) {
 
-void DLiteSearch::UpdateVertex(DLiteNode *v, const Map &map, const EnvironmentOptions &options, double k)
-{
-    std::list<DLiteNode*> tmp_list;
-    if (std::pair<int, int>(v->i, v->j) != map.getFinish()) {
-        tmp_list = GetNeigh(v, map, options);
+    s_start.i = Map.getStart().first;
+    s_start.j = Map.getStart().second;
+    s_goal.i = Map.getFinish().first;
+    s_goal.j = Map.getFinish().second;
+    NodesParam[s_goal] = NodeInfo(std::numeric_limits<double>::infinity(), 0);
+    NodesParam[s_start] = NodeInfo(std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity());
+    s_goal.key = CalculateKey(s_goal, Map, options);
+    s_last = s_start;
+    s_current.i = s_start.i;
+    s_current.j = s_start.j;
+    auto inserted = open_to_get.insert(s_goal);
+    open_to_find[s_goal] = &(*inserted.first);
+    MyHash hash;
+    CreatedNodes[s_goal] = hash(s_goal);
+    CreatedNodes[s_start] = hash(s_start);
 
-        double tmp = 1e9;
-        double tmp2 = 0;
+    bool running = true;
+    if (!ComputeShortestPath(Map, options)) {
+        std::cout << "GOVNO6\n\n\n\n";
+        return SearchResult();
+    }
 
-        for (auto node : tmp_list) {
-            tmp2 = GetG(node, map, options) + ((abs(v->i - node->i) + abs(v->j - node->j)) == 2 ? CN_SQRT_TWO : 1);
-            tmp = std::min(tmp, tmp2);
+    while (s_start != s_goal) {
+        auto TBEGIN = std::chrono::system_clock::now();
+//        PrintSet(open_to_get);
+        std::cout << "===============\n";
+        std::cout << s_start.i << ' ' << s_start.j << ' ' << NodesParam[s_goal].g << ' ' << NodesParam[s_goal].rhs << '\n';
+        std::cout << "===============\n";
+        auto min_val = GetMinNeigh(s_start, Map, options);
+        lppath.push_back(s_start);
+        if (min_val.first.i == -1) {
+            return SearchResult();
+        } else {
+            s_start = min_val.first;
         }
-
-        if (GetRhs(v, map, options) != tmp) {
-            if (v->g == 1e9 && v->rhs == 1e9) {
-                v->g = v->rhs = ComputeHeuristic(v->i, v->j, map.getFinish().first, map.getFinish().second, options);
+        min_val = GetMinNeigh(s_start, Map, options);
+        UpdateVertex(s_start, Map, options);
+        auto to_update = ExpandVisibility(Map, s_start);
+        if (!to_update.empty()) {
+            k_m += ComputeHeuristic(s_last.i, s_last.j, s_start.i, s_start.j, options);
+            s_last = s_start;
+        }
+        for (auto obstacle : to_update) {
+            DLiteNode obstacle_node(obstacle.first, obstacle.second, {std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity()});
+            if (CreatedNodes.find(obstacle_node) != CreatedNodes.end()) {
+//                auto to_erase = MyFind(open_to_get, obstacle_node);
+//                if (to_erase != open_to_get.end())
+//                    open_to_get.erase(to_erase);
+                if (open_to_find[obstacle_node]) {
+                    open_to_get.erase(*open_to_find[obstacle_node]);
+                    open_to_find[obstacle_node] = nullptr;
+                }
+                for (auto node : GetAllNotObst(obstacle_node, Map, options)) {
+                    if (node != s_goal && (NodesParent[node] == obstacle_node || SomeCheck(node, obstacle_node))) {
+                        auto min_val1 = GetMinNeigh(node, Map, options);
+                        if (min_val1.first.i == -1) {
+//                            to_erase = MyFind(open_to_get, node);
+//                            if (to_erase != open_to_get.end()) {
+//                                open_to_get.erase(to_erase);
+//                            }
+                            if (open_to_find[node]) {
+                                open_to_get.erase(*open_to_find[node]);
+                                open_to_find[node] = nullptr;
+                            }
+                            if  (node == s_start) {
+                                std::cout << "GOVNO5\n\n\n\n";
+                                return SearchResult();
+                            }
+                        } else {
+                            NodesParam[node].rhs = min_val1.second;
+                            NodesParent[node] = min_val1.first;
+                            UpdateVertex(node, Map, options);
+                        }
+                    }
+                }
             }
-            v->rhs = tmp;
+        }
+        if (ComputeShortestPath(Map, options)) {
+            auto TEND = std::chrono::system_clock::now();
+            std::cout << (TEND - TBEGIN).count() << '\n';
+            continue;
+        } else {
+            if (open_to_get.begin()->key == std::pair<double, double>(std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity())) {
+                std::cout << "GOVNO3\n\n\n\n";
+                return SearchResult();
+            }
         }
     }
-
-    if (GetG(v, map, options) != GetRhs(v, map, options)) {
-        double c;
-        v->key = CalculateKey(v, k);
-        MyHash hash;
-        c = 1.0 * hash({v->i, v->j});
-
-        openHash[{v->i, v->j}] = c;
-        open_to_get.insert(v);
-        open_to_find[{v->i, v->j}] = v;
-    }
+    std::cout << "OK\n\n\n\n";
+    NormalizePath();
+    PrintInFile(Map, {nullptr, nullptr});
+    return SearchResult();
 }
 
-int DLiteSearch::ComputeShortestPath(const Map &map, const EnvironmentOptions &options, double k) {
-    std::list<DLiteNode*> local_neigh;
-    if (open_to_get.empty()) {
-        return 1;
+std::pair<double, double> DLiteSearch::CalculateKey(const DLiteNode& v, const Map& map, const EnvironmentOptions& options)
+{
+    return { std::min(NodesParam[v].g, NodesParam[v].rhs) +
+             ComputeHeuristic(v.i, v.j, s_start.i, s_start.j, options) + k_m,
+             std::min(NodesParam[v].g, NodesParam[v].rhs) };
+}
+
+void DLiteSearch::UpdateVertex(DLiteNode& v, const Map &map, const EnvironmentOptions &options)
+{
+//    auto TBEGIN = std::chrono::system_clock::now();
+    if (abs(NodesParam[v].g - NodesParam[v].rhs) > EPS) {
+        v.key = CalculateKey(v, map, options);
+//        auto to_erase = MyFind(open_to_get, v);
+//        if (to_erase != open_to_get.end()) {
+//            open_to_get.erase(to_erase);
+//        }
+        if (open_to_find[v]) {
+            open_to_get.erase(*open_to_find[v]);
+            open_to_find[v] = nullptr;
+        }
+        auto inserted = open_to_get.insert(v);
+        open_to_find[v] = &(*inserted.first);
+    } else {
+//        auto to_find = MyFind(open_to_get, v);
+//        if  (to_find != open_to_get.end()) {
+//            open_to_get.erase(to_find);
+//        }
+        if (open_to_find[v]) {
+            open_to_get.erase(*open_to_find[v]);
+            open_to_find[v] = nullptr;
+        }
     }
+//    auto TEND = std::chrono::system_clock::now();
+//    std::cout << (TEND - TBEGIN).count() << '\n';
+}
+
+int DLiteSearch::ComputeShortestPath(const Map &map, const EnvironmentOptions &options) {
+    std::list<DLiteNode> local_neigh;
+//    if (open_to_get.empty()) {
+//        std::cout << "GOVNO2\n\n\n\n";
+//        return 1;
+//    }
+//    auto TBEGIN = std::chrono::system_clock::now();
 
     int c = 0;
-    DLiteNode* s_start = open_to_find[map.getStart()];
-    s_start->key = CalculateKey(s_start, k);
-    while (!open_to_get.empty() &&
-    ((**open_to_get.begin() < *s_start) || (GetRhs(s_start, map, options) != GetG(s_start, map, options)))) {
-        DLiteNode* v = nullptr;
-        bool test = (GetRhs(s_start, map, options) != GetG(s_start, map, options));
-
-        while (true) {
-            if (open_to_get.empty()) {
-                return 1;
+    while ((!open_to_get.empty()) && ((open_to_get.begin()->key < CalculateKey(s_start, map, options)) || (NodesParam[s_start].rhs != NodesParam[s_start].g))) {
+        DLiteNode v = *open_to_get.begin();
+        auto old_k = v.key;
+        auto new_k = CalculateKey(v, map, options);
+        if (old_k < new_k) {
+            v.key = new_k;
+//            auto to_erase = MyFind(open_to_get, v);
+//            if (to_erase != open_to_get.end()) {
+//                open_to_get.erase(to_erase);
+//            }
+            if (open_to_find[v]) {
+                open_to_get.erase(*open_to_find[v]);
+                open_to_find[v] = nullptr;
             }
-            v = *open_to_get.begin();
+            auto inserted = open_to_get.insert(v);
+            open_to_find[v] = &(*inserted.first);
+        } else if (NodesParam[v].g > NodesParam[v].rhs) {
+            NodesParam[v].g = NodesParam[v].rhs;
+            open_to_find[*open_to_get.begin()] = nullptr;
             open_to_get.erase(open_to_get.begin());
-            open_to_find.erase(open_to_find.find({ v->i, v->j }));
-            if (!IsValid(v)) {
-                continue;
-            }
-            if (!(*v < *s_start) && (!test)) {
-                return 2;
-            }
-            break;
-        }
-        openHash.erase(openHash.find({ v->i, v->j }));
-        DLiteNode* old = v;
-        if (GetG(v, map, options) > GetRhs(v, map, options)) {
-            if (v->g == 1e9 && v->rhs == 1e9) {
-                v->g = v->rhs = ComputeHeuristic(v->i, v->j, map.getFinish().first, map.getFinish().second, options);
-            }
-            v->g = GetRhs(v, map, options);
-            local_neigh = GetNeigh(v, map, options);
-            for (auto node : local_neigh) {
-                UpdateVertex(node, map, options, k);
-            }
-        } else if (GetG(v, map, options) < GetRhs(v, map, options)) {
-            if (v->g == 1e9 && v->rhs == 1e9) {
-                v->g = v->rhs = ComputeHeuristic(v->i, v->j, map.getFinish().first, map.getFinish().second, options);
-            }
-            v->g = 1e9;
-            local_neigh = GetNeigh(v, map, options);
-            for (auto node : local_neigh) {
-                UpdateVertex(node, map, options, k);
-            }
-            UpdateVertex(v, map, options, k);
-        }
-        s_start->key = CalculateKey(s_start, k);
-    }
-    return 0;
-}
-
-DLiteNode* DLiteSearch::Argmin(const DLiteNode* v, const Map &map, const EnvironmentOptions &options) {
-    DLiteNode* answer = nullptr;
-    for (int i = -1; i <= 1; ++i) {
-        for (int j = -1; j <= 1; ++j) {
-            if (i == 0 && j == 0) { continue; }
-            if (map.CellOnGrid(v->i + i, v->j + j) &&
-                (map.CellIsTraversable(v->i + i, v->j + j) || !map.CellIsVisible(v->i + i, v->j + j))) {
-                if (abs(i) == abs(j)) {
-                    if (!options.allowdiagonal) {
-                        continue;
-                    }
-                    if ((!map.CellOnGrid(v->i, v->j + j) ||
-                         !map.CellIsTraversable(v->i, v->j + j)) &&
-                        map.CellIsVisible(v->i, v->j + j)) {
-                        if (!options.cutcorners) {
-                            continue;
-                        }
-                    }
-                    if ((!map.CellOnGrid(v->i + i, v->j) ||
-                         !map.CellIsTraversable(v->i + i, v->j)) &&
-                        map.CellIsVisible(v->i + i, v->j)) {
-                        if (!options.cutcorners) {
-                            continue;
-                        }
-                    }
-                    if (((!map.CellOnGrid(v->i, v->j + j) ||
-                          !map.CellIsTraversable(v->i, v->j + j)) &&
-                         map.CellIsVisible(v->i, v->j + j)) &&
-                        ((!map.CellOnGrid(v->i + i, v->j) ||
-                          !map.CellIsTraversable(v->i + i, v->j)) &&
-                         map.CellIsVisible(v->i + i, v->j))) {
-                        if (!options.allowsqueeze) {
-                            continue;
-                        }
-                    }
-                }
-                double min_value = 1e9;
-                std::pair<int, int> to_find = {v->i + i, v->j + j};
-                auto f = open_to_find.find(to_find);
-                if (f != open_to_find.end()) {
-                    if (open_to_find[to_find]->g + 1.0 * (abs(i) != abs(j)) + CN_SQRT_TWO * (abs(i) == abs(j)) < min_value) {
-                        answer = open_to_find[to_find];
-                        min_value = open_to_find[to_find]->g + 1.0 * (abs(i) != abs(j)) + CN_SQRT_TWO * (abs(i) == abs(j));
-                    }
+            for (auto& node : GetNeigh(v, map, options)) {
+                if (node != s_goal && NodesParam[node].rhs > NodesParam[v].g + ((abs(v.i - node.i) + abs(v.j - node.j)) == 2 ? CN_SQRT_TWO : 1)) {
+                    NodesParent[node] = v;
+                    NodesParam[node].rhs = NodesParam[v].g + ((abs(v.i - node.i) + abs(v.j - node.j)) == 2 ? CN_SQRT_TWO : 1);
                 }
 
+                UpdateVertex(node, map, options);
+            }
+        } else {
+            NodesParam[v].g = std::numeric_limits<double>::infinity();
+            local_neigh = GetNeigh(v, map, options);
+            local_neigh.push_back(v);
+            for (auto& node : local_neigh) {
+                if (node != s_goal && NodesParent[node] == v) {
+                    auto min_ans = GetMinNeigh(node, map, options);
+                    NodesParam[node].rhs = min_ans.second;
+                    if (min_ans.first.i != -1) {
+                        NodesParent[node] = min_ans.first;
+                    }
+                }
+                UpdateVertex(node, map, options);
             }
         }
     }
-    return answer;
+//    auto TEND = std::chrono::system_clock::now();
+//    std::cout << (TEND - TBEGIN).count() << '\n';
+    if (NodesParam[s_start].rhs != std::numeric_limits<double>::infinity()) {
+        return true;
+    } else {
+        std::cout << "GOVNO1\n\n\n\n";
+        return false;
+    }
+    return false;
 }
 
-std::vector<std::pair<int, int>> DLiteSearch::ExpandVisibility(Map &map) {
-    std::vector<std::pair<int, int>> to_return;
+std::vector<std::pair<int, int>>
+DLiteSearch::ExpandVisibility(Map &map, const DLiteNode& node) {
+//    auto TBEGIN = std::chrono::system_clock::now();
+    std::vector<std::pair<int, int>> to_return_obstacles;
     for (int i = -map.getVisibility(); i <= map.getVisibility(); ++i) {
         for (int j = -map.getVisibility(); j <= map.getVisibility(); ++j) {
-            if (map.CellOnGrid(lppath.back().i + i, lppath.back().j + j)) {
-                map.makeVisible(lppath.back().i + i, lppath.back().j + j);
-                if (map.CellIsTraversable(lppath.back().i + i, lppath.back().j + j)) {
-                    to_return.push_back({ lppath.back().i + i, lppath.back().j + j });
+            if (map.CellOnGrid(node.i + i, node.j + j) && Distance(node, DLiteNode(node.i + i, node.j + j, {-1, -1})) < map.getVisibility()) {
+                if (!map.CellIsVisible(node.i + i, node.j + j) && !map.CellIsTraversable(node.i + i, node.j + j)) {
+                    to_return_obstacles.push_back({node.i + i, node.j + j});
                 }
+                map.makeVisible(node.i + i, node.j + j);
             }
         }
     }
-    return to_return;
+//    auto TEND = std::chrono::system_clock::now();
+//    std::cout << (TEND - TBEGIN).count() << '\n';
+    return to_return_obstacles;
 }
 
 void DLiteSearch::PrintInFile(Map& map, std::pair<Node*, Node*> i_path) {
@@ -226,102 +299,6 @@ void DLiteSearch::PrintInFile(Map& map, std::pair<Node*, Node*> i_path) {
     }
 
     out.close();
-}
-
-SearchResult DLiteSearch::StartDLiteSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options) {
-    DLiteNode* prevCur = new DLiteNode();
-    int C1 = 1;
-    double k_m = 0;
-    DLiteNode* s_start = new DLiteNode();
-    DLiteNode* s_goal = new DLiteNode();
-    DLiteNode* s_last = new DLiteNode();
-    DLiteNode* s_current = new DLiteNode();
-    s_start->i = Map.getStart().first;
-    s_start->j = Map.getStart().second;
-    s_goal->i = Map.getFinish().first;
-    s_goal->j = Map.getFinish().second;
-    s_goal->g = 0;
-    s_goal->rhs = 0;
-    s_goal->cost = 1;
-    s_goal->H = 0;
-    s_start->g = s_start->rhs = s_start->H = ComputeHeuristic(s_start->i, s_start->j, s_goal->i, s_goal->j, options);
-    s_start->cost = C1;
-    s_start->key = CalculateKey(s_start, k_m);
-    s_last = s_start;
-    s_current->i = s_start->i;
-    s_current->j = s_start->j;
-    std::cout << "START\n";
-
-    std::list<DLiteNode> traveled_path;
-
-    int result = ComputeShortestPath(Map, options, k_m);
-    if (result < 0) {
-        return SearchResult();
-    }
-
-    std::cout << "AAA\n\n";
-
-    std::list<DLiteNode*> n;
-    DLiteNode* current = s_start;
-
-    if (GetG(s_start, Map, options) == 1e9) {
-        return SearchResult();
-    }
-
-    std::cout << "BBB\n\n";
-
-    while ((current->i != s_goal->i || current->j != s_goal->j) &&
-            Distance(s_start, current) < Map.getVisibility()) {
-        lppath.emplace_back(DLiteNode(*current));
-        std::cout << lppath.back().i << " " << lppath.back().j << '\n';
-        prevCur->i = current->i;
-        prevCur->j = current->j;
-        traveled_path.emplace_back(DLiteNode(*current));
-        n.clear();
-        n = GetNeigh(current, Map, options);
-        if (n.empty()) {
-            return SearchResult();
-        }
-        double cmin = 1e9;
-        double tmin = 0;
-        DLiteNode* new_node;
-
-        for (auto node : n) {
-            double node_rhs = GetRhs(node, Map, options);
-            double node_dist = Distance(node, s_goal) + Distance(s_start, node);
-
-            if (abs(node_rhs - cmin) < EPS && tmin > node_dist) {
-                tmin = node_dist;
-                cmin = node_rhs;
-                new_node = node;
-            } else if (node_rhs < cmin) {
-                tmin = node_dist;
-                cmin = node_rhs;
-                new_node = node;
-            }
-        }
-        n.clear();
-        current = new_node;
-        ExpandVisibility(Map);
-    }
-    if (current->i == s_goal->i && current->j == s_goal->j) {
-        s_current = current;
-        traveled_path.emplace_back(DLiteNode(*s_goal));
-    } else if (Distance(s_start, current) < Map.getVisibility()) {
-        s_current->i = current->i;
-        s_current->j = current->j;
-        s_start->i = current->i;
-        s_start->j = current->j;
-        s_start->key = CalculateKey(s_start, k_m);
-        s_last = s_start;
-    } else {
-        s_start->i = prevCur->i;
-        s_start->j = prevCur->j;
-        s_start->key = CalculateKey(s_start, k_m);
-        s_last = s_start;
-    }
-    PrintInFile(Map, {nullptr, nullptr});
-    return SearchResult();
 }
 
 Search::Search()
@@ -728,8 +705,8 @@ void SeqSearch::localClear() {
         delete x.second;
     }
     open_to_get = std::set<Node*, Comparator>();
-    open_to_find = std::unordered_map<std::pair<int, int>, Node*, MyHash>();
-    close = std::unordered_map<std::pair<int, int>, Node*, MyHash>();
+    open_to_find = std::unordered_map<std::pair<int, int>, Node*, MySimpleHash>();
+    close = std::unordered_map<std::pair<int, int>, Node*, MySimpleHash>();
 }
 
 void SeqSearch::ExpandVisibility(Map &map) {

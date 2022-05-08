@@ -50,6 +50,8 @@ class Map
         std::pair<int, int> getStart() const;
         std::pair<int, int> getFinish() const;
         int getVisibility() const;
+        void setStart(int i, int j);
+        void setFinish(int i, int j);
 };
 
 #endif
