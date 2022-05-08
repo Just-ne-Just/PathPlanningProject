@@ -76,6 +76,8 @@
         #define CNS_SP_ST_BFS           "bfs"
         #define CNS_SP_ST_DIJK          "dijkstra"
         #define CNS_SP_ST_ASTAR         "astar"
+        #define CNS_SP_ST_SEQASTAR      "seqastar"
+        #define CNS_SP_ST_DLITE         "dlite"
         #define CNS_SP_ST_JP_SEARCH     "jp_search"
         #define CNS_SP_ST_TH            "theta"
 
@@ -84,6 +86,8 @@
         #define CN_SP_ST_ASTAR          2
         #define CN_SP_ST_JP_SEARCH      3
         #define CN_SP_ST_TH             4
+        #define CN_SP_ST_SEQASTAR       5
+        #define CN_SP_ST_DLITE          6
 
     #define CN_SP_AD 1 //AllowDiagonal
 

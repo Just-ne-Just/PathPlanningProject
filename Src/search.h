@@ -59,7 +59,7 @@ class Search
     public:
         Search();
         ~Search(void);
-        SearchResult startSearch(ILogger *Logger, const Map &Map, const EnvironmentOptions &options);
+        SearchResult startSearch(const Map &Map, const EnvironmentOptions &options);
 
         double ComputeHeuristic(int i_current, int j_current,
                                 int i_finish, int j_finish,
@@ -85,8 +85,8 @@ public:
     SeqSearch();
     ~SeqSearch(void);
 
-    SearchResult startSeqSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options);
-    std::pair<Node*, Node*> searchStep(ILogger *Logger, Map &Map, const EnvironmentOptions &options, Node startNode);
+    SearchResult startSeqSearch(Map &Map, const EnvironmentOptions &options);
+    std::pair<Node*, Node*> searchStep(Map &Map, const EnvironmentOptions &options, Node startNode);
 
     double ComputeHeuristic(int i_current, int j_current,
                             int i_finish, int j_finish,
@@ -114,7 +114,7 @@ public:
     DLiteSearch();
     ~DLiteSearch(void);
 
-    DLiteSearchResult StartDLiteSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options);
+    DLiteSearchResult StartDLiteSearch(Map &Map, const EnvironmentOptions &options);
 
 
     double ComputeHeuristic(int i_current, int j_current,

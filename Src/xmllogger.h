@@ -7,10 +7,10 @@
 //That's the class that flushes the data to the output XML
 
 
-class XmlLogger : public ILogger {
+class XmlLogger {
 
 public:
-    XmlLogger(std::string loglevel):ILogger(loglevel){}
+    XmlLogger(std::string loglevel) {this->loglevel = loglevel;}
 
     virtual ~XmlLogger() {};
 
@@ -18,19 +18,23 @@ public:
 
     void saveLog();
 
-    void writeToLogMap(const Map &Map, const std::list<DLiteNode> &path);
+    template<typename T>
+    void writeToLogMap(const Map &Map, const T &path);
 
     //void writeToLogOpenClose(const typename &open, const typename &close);
 
-    void writeToLogPath(const std::list<DLiteNode> &path);
+    template<typename T>
+    void writeToLogPath(const T &path);
 
-    void writeToLogHPpath(const std::list<DLiteNode> &hppath);
+    template<typename T>
+    void writeToLogHPpath(const T &hppath);
 
     void writeToLogNotFound();
 
     void writeToLogSummary(unsigned int numberofsteps, unsigned int nodescreated, float length, double time, double cellSize, unsigned int memory);
 
 private:
+    std::string loglevel;
     std::string LogFileName;
     tinyxml2::XMLDocument doc;
 };

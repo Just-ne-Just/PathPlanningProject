@@ -34,20 +34,6 @@ struct DLiteNode {
         key = other.key;
     }
 
-//    bool operator< (const DLiteNode& other) const {
-//        if (i == other.i && j == other.j) {
-//            return false;
-//        }
-//        return key < other.key;
-//    }
-//
-//    bool operator> (const DLiteNode& other) const {
-//        if (i == other.i && j == other.j) {
-//            return false;
-//        }
-//        return key > other.key;
-//    }
-
     bool operator== (const DLiteNode& other) const {
         return (i == other.i && j == other.j);
     }
@@ -56,16 +42,5 @@ struct DLiteNode {
         return (i != other.i || j != other.j);
     }
 };
-
-//bool operator< (DLiteNode l, DLiteNode r) {
-//    if (l.i == r.i && l.j == r.j) {
-//        return false;
-//    }
-//    return l.key < r.key;
-//}
-//
-//bool operator== (const DLiteNode& l, const DLiteNode& r) {
-//    return (l.i == r.i && l.j == r.j);
-//}
 
 #endif

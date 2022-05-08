@@ -61,7 +61,7 @@ bool Config::getConfig(const char *FileName)
         SearchParams = new double[N];
         SearchParams[CN_SP_ST] = CN_SP_ST_DIJK;
     }
-    else if (value == CNS_SP_ST_ASTAR || value == CNS_SP_ST_JP_SEARCH || value == CNS_SP_ST_TH) {
+    else if (value == CNS_SP_ST_ASTAR || value == CNS_SP_ST_JP_SEARCH || value == CNS_SP_ST_TH || value == CNS_SP_ST_SEQASTAR || value == CNS_SP_ST_DLITE) {
         N = 7;
         SearchParams = new double[N];
         SearchParams[CN_SP_ST] = CN_SP_ST_ASTAR;
@@ -69,6 +69,10 @@ bool Config::getConfig(const char *FileName)
             SearchParams[CN_SP_ST] = CN_SP_ST_JP_SEARCH;
         else if (value == CNS_SP_ST_TH)
             SearchParams[CN_SP_ST] = CN_SP_ST_TH;
+        else if (value == CNS_SP_ST_SEQASTAR)
+            SearchParams[CN_SP_ST] = CN_SP_ST_SEQASTAR;
+        else if (value == CNS_SP_ST_DLITE)
+            SearchParams[CN_SP_ST] = CN_SP_ST_DLITE;
         element = algorithm->FirstChildElement(CNS_TAG_HW);
         if (!element) {
             std::cout << "Warning! No '" << CNS_TAG_HW << "' tag found in algorithm section." << std::endl;

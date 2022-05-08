@@ -77,7 +77,7 @@ double CalculatePathLength(const std::list<DLiteNode>& path) {
     return answer;
 }
 
-DLiteSearchResult DLiteSearch::StartDLiteSearch(ILogger *Logger, Map &Map, const EnvironmentOptions &options) {
+DLiteSearchResult DLiteSearch::StartDLiteSearch(Map &Map, const EnvironmentOptions &options) {
     auto TBEGIN = std::chrono::system_clock::now();
     s_start.i = Map.getStart().first;
     s_start.j = Map.getStart().second;
@@ -364,7 +364,7 @@ double Search::ComputeHeuristic(int i_current, int j_current,
     return 0;
 }
 
-SearchResult Search::startSearch(ILogger *Logger, const Map &map, const EnvironmentOptions &options)
+SearchResult Search::startSearch(const Map &map, const EnvironmentOptions &options)
 {
 //    std::cout << map.getStart().first << ' ' << map.getStart().second << '\n';
 //    std::cout << map.getFinish().first << ' ' << map.getFinish().second << '\n';
@@ -565,7 +565,7 @@ double SeqSearch::ComputeHeuristic(int i_current, int j_current,
     return 0;
 }
 
-std::pair<Node*, Node*> SeqSearch::searchStep(ILogger *Logger, Map &map, const EnvironmentOptions &options,
+std::pair<Node*, Node*> SeqSearch::searchStep(Map &map, const EnvironmentOptions &options,
                                               Node startNode)
 {
     auto H = ComputeHeuristic(startNode.i,
@@ -806,12 +806,12 @@ void SeqSearch::NormalizePath() {
     }
 }
 
-SearchResult SeqSearch::startSeqSearch(ILogger *Logger, Map &map, const EnvironmentOptions &options)
+SearchResult SeqSearch::startSeqSearch(Map &map, const EnvironmentOptions &options)
 {
     auto TBEGIN = std::chrono::system_clock::now();
     lppath.push_back(Node{map.getStart().first, map.getStart().second, 0, 0, 0, nullptr, nullptr});
     while (true) {
-        auto begin_end = searchStep(Logger, map, options, lppath.back());
+        auto begin_end = searchStep(map, options, lppath.back());
         if (!begin_end.second) {
             std::cerr << "Not found\n" << std::endl;
             localClear();

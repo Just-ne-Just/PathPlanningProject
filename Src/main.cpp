@@ -27,9 +27,19 @@ int main(int argc, char* argv[])
             else {
                 std::cout<<"Log OK!"<<std::endl<<"Start searching the path:"<<std::endl;
 
-                mission.createEnvironmentOptions();
-                mission.createSearch();
-                mission.startDLiteSearch();
+                if (mission.config.SearchParams[CN_SP_ST] == CN_SP_ST_SEQASTAR) {
+                    mission.createEnvironmentOptions();
+                    mission.createSearch();
+                    mission.startSeqSearch();
+                } else if (mission.config.SearchParams[CN_SP_ST] == CN_SP_ST_DLITE) {
+                    mission.createEnvironmentOptions();
+                    mission.createSearch();
+                    mission.startDLiteSearch();
+                } else {
+                    mission.createEnvironmentOptions();
+                    mission.createSearch();
+                    mission.startSearch();
+                }
 
                 std::cout<<"Search is finished!"<<std::endl;
 

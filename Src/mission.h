@@ -34,15 +34,14 @@ class Mission
         void printSearchResultsToConsole();
         void saveSearchResultsToLog();
         DLiteSearchResult getSearchResult();
-        
-    private:
-        Map                     map;
         Config                  config;
+private:
+        Map                     map;
         EnvironmentOptions      options;
         Search                  search;
         SeqSearch               seqsearch;
         DLiteSearch             dlitesearch;
-        ILogger*                logger;
+        XmlLogger*              logger;
         const char*             fileName;
         SearchResult            sr;
         DLiteSearchResult       dsr;
