@@ -89,7 +89,7 @@ void XmlLogger::saveLog()
 }
 
 template<typename T>
-void XmlLogger::writeToLogMap(const Map &map, const T &path)
+void XmlLogger::writeToLogMap(const Map &map, const std::list<T> &path)
 {
     if (loglevel == CN_LP_LEVEL_NOPE_WORD || loglevel == CN_LP_LEVEL_TINY_WORD)
         return;
@@ -135,7 +135,7 @@ void XmlLogger::writeToLogMap(const Map &map, const T &path)
 }*/
 
 template<typename T>
-void XmlLogger::writeToLogPath(const T &path)
+void XmlLogger::writeToLogPath(const std::list<T> &path)
 {
     if (loglevel == CN_LP_LEVEL_NOPE_WORD || loglevel == CN_LP_LEVEL_TINY_WORD || path.empty())
         return;
@@ -154,7 +154,7 @@ void XmlLogger::writeToLogPath(const T &path)
 }
 
 template<typename T>
-void XmlLogger::writeToLogHPpath(const T &hppath)
+void XmlLogger::writeToLogHPpath(const std::list<T> &hppath)
 {
     if (loglevel == CN_LP_LEVEL_NOPE_WORD || loglevel == CN_LP_LEVEL_TINY_WORD || hppath.empty())
         return;
@@ -172,7 +172,6 @@ void XmlLogger::writeToLogHPpath(const T &hppath)
         ++iter;
         part->SetAttribute(CNS_TAG_ATTR_FINX, iter->j);
         part->SetAttribute(CNS_TAG_ATTR_FINY, iter->i);
-        part->SetAttribute(CNS_TAG_ATTR_LENGTH, sqrt(std::pow(iter->i - it->i, 2) + std::pow(iter->j - it->j, 2)));
         hplevel->LinkEndChild(part);
         ++it;
         ++partnumber;

@@ -19,15 +19,15 @@ public:
     void saveLog();
 
     template<typename T>
-    void writeToLogMap(const Map &Map, const T &path);
+    void writeToLogMap(const Map &Map, const std::list<T> &path);
 
     //void writeToLogOpenClose(const typename &open, const typename &close);
 
     template<typename T>
-    void writeToLogPath(const T &path);
+    void writeToLogPath(const std::list<T> &path);
 
     template<typename T>
-    void writeToLogHPpath(const T &hppath);
+    void writeToLogHPpath(const std::list<T> &hppath);
 
     void writeToLogNotFound();
 
