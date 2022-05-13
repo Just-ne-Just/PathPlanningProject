@@ -307,7 +307,7 @@ void DLiteSearch::PrintInFile(Map& map, std::pair<Node*, Node*> i_path) {
         }
     }
     std::ofstream out;          // поток для записи
-    out.open("./out", std::ios_base::out); // окрываем файл для записи
+    out.open("../../Visual/out", std::ios_base::out); // окрываем файл для записи
 
     out << map.getVisibility() << '\n';
 
@@ -764,7 +764,7 @@ void SeqSearch::PrintInFile(Map& map, std::pair<Node*, Node*> i_path) {
         }
     }
     std::ofstream out;          // поток для записи
-    out.open("./out", std::ios_base::out); // окрываем файл для записи
+    out.open("../../Visual/out", std::ios_base::out); // окрываем файл для записи
 
     out << map.getVisibility() << '\n';
 
