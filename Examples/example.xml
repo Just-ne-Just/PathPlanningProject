@@ -38,9 +38,8 @@
         </grid>
     </map>
     <algorithm>
-        <searchtype>astar</searchtype>
+        <searchtype>dlite</searchtype>
         <metrictype>euclid</metrictype>
-        <breakingties>g-max</breakingties>
         <hweight>1</hweight>
         <allowdiagonal>1</allowdiagonal>
         <cutcorners>1</cutcorners>

@@ -106,9 +106,9 @@ void Mission::saveSearchResultsToLog()
     } else {
         logger->writeToLogSummary(dsr.numberofsteps, dsr.nodescreated, dsr.pathlength, dsr.time, map.getCellSize(), dsr.memory);
         if (dsr.pathfound) {
-            logger->writeToLogPath(*dsr.lppath);
-            logger->writeToLogHPpath(*dsr.hppath);
-            logger->writeToLogMap(map, *dsr.lppath);
+            logger->writeToLogPathDLite(*dsr.lppath);
+            logger->writeToLogHPpathDLite(*dsr.hppath);
+            logger->writeToLogMapDLite(map, *dsr.lppath);
         } else
             logger->writeToLogNotFound();
         logger->saveLog();

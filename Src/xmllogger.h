@@ -6,11 +6,12 @@
 
 //That's the class that flushes the data to the output XML
 
-
 class XmlLogger {
 
 public:
-    XmlLogger(std::string loglevel) {this->loglevel = loglevel;}
+    XmlLogger(std::string loglevel) {
+        this->loglevel = loglevel;
+    }
 
     virtual ~XmlLogger() {};
 
@@ -18,16 +19,16 @@ public:
 
     void saveLog();
 
-    template<typename T>
-    void writeToLogMap(const Map &Map, const std::list<T> &path);
+    void writeToLogMap(const Map &Map, const std::list<Node> &path);
+    void writeToLogMapDLite(const Map &Map, const std::list<DLiteNode> &path);
 
     //void writeToLogOpenClose(const typename &open, const typename &close);
 
-    template<typename T>
-    void writeToLogPath(const std::list<T> &path);
+    void writeToLogPath(const std::list<Node> &path);
+    void writeToLogPathDLite(const std::list<DLiteNode> &path);
 
-    template<typename T>
-    void writeToLogHPpath(const std::list<T> &hppath);
+    void writeToLogHPpath(const std::list<Node> &hppath);
+    void writeToLogHPpathDLite(const std::list<DLiteNode> &hppath);
 
     void writeToLogNotFound();
 
