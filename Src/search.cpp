@@ -838,7 +838,10 @@ SearchResult SeqSearch::startSeqSearch(Map &map, const EnvironmentOptions &optio
     PrintInFile(map, { nullptr, nullptr });
     auto TEND = std::chrono::system_clock::now();
     sresult.lppath = &lppath;
+    makeSecondaryPath();
+    sresult.hppath = &hppath;
     std::chrono::duration<double> time = (TEND - TBEGIN);
     sresult.time = time.count();
+    sresult.pathlength = 10;
     return sresult;
 }
