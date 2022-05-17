@@ -517,7 +517,8 @@ SearchResult Search::startSearch(const Map &map, const EnvironmentOptions &optio
     sresult.hppath = &hppath; //Here is a constant pointer
     sresult.lppath = &lppath;
     sresult.nodescreated = open_to_get.size() + close.size();
-    sresult.pathlength = lastnode->g;
+    if (lastnode)
+      sresult.pathlength = lastnode->g;
     auto TEND = std::chrono::system_clock::now();
     std::chrono::duration<double> time = (TEND - TBEGIN);
     sresult.time = time.count();
