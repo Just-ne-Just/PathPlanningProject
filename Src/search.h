@@ -193,17 +193,19 @@ public:
 
     std::pair<DLiteNode, double> GetMinNeigh(const DLiteNode& node,  const Map& map, const EnvironmentOptions& options) {
 //        auto TBEGIN = std::chrono::system_clock::now();
+        // std::cout << node.i << ' ' << node.j << ' ';
         auto node_neigh = GetNeigh(node, map, options);
         DLiteNode min_node_parent(-1, -1, {std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity()});
         double min_rhs = std::numeric_limits<double>::infinity();
-        for (auto& node1 : node_neigh) {
-            if (min_rhs >= NodesParam[node1].g + ((abs(node1.i - node.i) + abs(node1.j - node.j)) == 2 ? CN_SQRT_TWO : 1)) {
-                min_rhs = NodesParam[node1].g + ((abs(node1.i - node.i) + abs(node1.j - node.j)) == 2 ? CN_SQRT_TWO : 1);
+        for (auto node1 : node_neigh) {
+            if (min_rhs >= NodesParam[node1].g + Distance(node1, node)) {
+                min_rhs = NodesParam[node1].g + Distance(node1, node);
                 min_node_parent = node1;
             }
         }
 //        auto TEND = std::chrono::system_clock::now();
 //        std::cout << (TEND - TBEGIN).count() << '\n';
+        // std::cout << min_rhs << '\n';
         return { min_node_parent, min_rhs };
     }
 
@@ -215,17 +217,17 @@ public:
         if(options.allowdiagonal) {
             for (int k = i - 1; k <= i + 1; ++k) {
                 for (int l = j - 1; l <= j + 1; ++l) {
-                    if (!(k == i && l == j) && map.CellOnGrid(k, l) && map.CellIsTraversable(k, l)) {
+                    if (!(k == i && l == j) && map.CellOnGrid(k, l) && (map.CellIsTraversable(k, l) || !map.CellIsVisible(k, l))) {
                         result1.push_front(DLiteNode(k, l, {std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity()}));
                     }
                 }
             }
         } else {
             for (int k = j - 1; k <= j + 1; ++k)
-                if (k != j && map.CellOnGrid(i, k) && map.CellIsTraversable(i, k))
+                if (k != j && map.CellOnGrid(i, k) && (map.CellIsTraversable(i, k) || !map.CellIsVisible(i, k)))
                     result1.push_front(DLiteNode(i, k, {std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity()}));
             for (int l = i - 1; l <= i + 1; ++l)
-                if (l != i && map.CellOnGrid(l, j) && map.CellIsTraversable(l, j))
+                if (l != i && map.CellOnGrid(l, j) && (map.CellIsTraversable(l, j) || !map.CellIsVisible(l, j)))
                     result1.push_front(DLiteNode(l, j, {std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity()}));
         }
         std::deque<DLiteNode> result;

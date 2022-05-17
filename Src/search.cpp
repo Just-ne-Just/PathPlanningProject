@@ -99,15 +99,28 @@ DLiteSearchResult DLiteSearch::StartDLiteSearch(Map &Map, const EnvironmentOptio
 
     bool running = true;
     if (!ComputeShortestPath(Map, options)) {
-        return DLiteSearchResult();
+        auto TEND = std::chrono::system_clock::now();
+        std::chrono::duration<double> time = (TEND - TBEGIN);
+        sresult.time = time.count();
+        return sresult;
     }
 
     while (s_start != s_goal) {
-//        PrintSet(open_to_get);
+        // PrintSet(open_to_get);
         auto min_val = GetMinNeigh(s_start, Map, options);
         lppath.push_back(s_start);
+        // std::cout << lppath.back().i << ' ' << lppath.back().j << ' ' << NodesParam[lppath.back()].g << ' ' << NodesParam[lppath.back()].rhs << '\n';
+        if (NodesParam[lppath.back()].g == std::numeric_limits<double>::infinity() && NodesParam[lppath.back()].rhs == std::numeric_limits<double>::infinity()) {
+            auto TEND = std::chrono::system_clock::now();
+            std::chrono::duration<double> time = (TEND - TBEGIN);
+            sresult.time = time.count();
+            return sresult;
+        }
         if (min_val.first.i == -1) {
-            return DLiteSearchResult();
+            auto TEND = std::chrono::system_clock::now();
+            std::chrono::duration<double> time = (TEND - TBEGIN);
+            sresult.time = time.count();
+            return sresult;
         } else {
             s_start = min_val.first;
         }
@@ -115,8 +128,8 @@ DLiteSearchResult DLiteSearch::StartDLiteSearch(Map &Map, const EnvironmentOptio
         UpdateVertex(s_start, Map, options);
         auto to_update = ExpandVisibility(Map, s_start);
         if (!to_update.empty()) {
-            k_m += ComputeHeuristic(s_last.i, s_last.j, s_start.i, s_start.j, options);
-            s_last = s_start;
+            // k_m += ComputeHeuristic(s_last.i, s_last.j, s_start.i, s_start.j, options);
+            // s_last = s_start;
         }
         for (auto obstacle : to_update) {
             DLiteNode obstacle_node(obstacle.first, obstacle.second, {std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity()});
@@ -141,7 +154,10 @@ DLiteSearchResult DLiteSearch::StartDLiteSearch(Map &Map, const EnvironmentOptio
                                 open_to_find[node] = nullptr;
                             }
                             if  (node == s_start) {
-                                return DLiteSearchResult();
+                                auto TEND = std::chrono::system_clock::now();
+                                std::chrono::duration<double> time = (TEND - TBEGIN);
+                                sresult.time = time.count();
+                                return sresult;
                             }
                         } else {
                             NodesParam[node].rhs = min_val1.second;
@@ -156,13 +172,16 @@ DLiteSearchResult DLiteSearch::StartDLiteSearch(Map &Map, const EnvironmentOptio
             continue;
         } else {
             if (open_to_get.begin()->key == std::pair<double, double>(std::numeric_limits<double>::infinity(), std::numeric_limits<double>::infinity())) {
-                return DLiteSearchResult();
+                auto TEND = std::chrono::system_clock::now();
+                std::chrono::duration<double> time = (TEND - TBEGIN);
+                sresult.time = time.count();
+                return sresult;
             }
         }
     }
     lppath.push_back(s_goal);
     std::cout << "\n";
-    NormalizePath();
+    // NormalizePath();
     PrintInFile(Map, {nullptr, nullptr});
     sresult.pathfound = true;
     sresult.nodescreated = CreatedNodes.size();
@@ -242,19 +261,18 @@ int DLiteSearch::ComputeShortestPath(const Map &map, const EnvironmentOptions &o
             NodesParam[v].g = NodesParam[v].rhs;
             open_to_find[*open_to_get.begin()] = nullptr;
             open_to_get.erase(open_to_get.begin());
-            for (auto& node : GetNeigh(v, map, options)) {
-                if (node != s_goal && NodesParam[node].rhs > NodesParam[v].g + ((abs(v.i - node.i) + abs(v.j - node.j)) == 2 ? CN_SQRT_TWO : 1)) {
+            for (auto node : GetNeigh(v, map, options)) {
+                if (node != s_goal && NodesParam[node].rhs > NodesParam[v].g + Distance(node, v)) {
                     NodesParent[node] = v;
-                    NodesParam[node].rhs = NodesParam[v].g + ((abs(v.i - node.i) + abs(v.j - node.j)) == 2 ? CN_SQRT_TWO : 1);
+                    NodesParam[node].rhs = NodesParam[v].g + Distance(node, v);
                 }
-
                 UpdateVertex(node, map, options);
             }
         } else {
             NodesParam[v].g = std::numeric_limits<double>::infinity();
             local_neigh = GetNeigh(v, map, options);
             local_neigh.push_back(v);
-            for (auto& node : local_neigh) {
+            for (auto node : local_neigh) {
                 if (node != s_goal && NodesParent[node] == v) {
                     auto min_ans = GetMinNeigh(node, map, options);
                     NodesParam[node].rhs = min_ans.second;
@@ -265,6 +283,7 @@ int DLiteSearch::ComputeShortestPath(const Map &map, const EnvironmentOptions &o
                 UpdateVertex(node, map, options);
             }
         }
+        s_start.key = CalculateKey(s_start, map, options);
     }
 //    auto TEND = std::chrono::system_clock::now();
 //    std::cout << (TEND - TBEGIN).count() << '\n';

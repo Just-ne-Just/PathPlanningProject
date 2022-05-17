@@ -6,7 +6,7 @@ import time
 from matplotlib.pyplot import figure
 
 
-with open("kek.txt", "r") as f:
+with open("out", "r") as f:
     kek = list(map(lambda x: list(map(int, x.strip().split())), f.readlines()))
 
 visibility = int(kek[0][0])
