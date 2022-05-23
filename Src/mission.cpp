@@ -95,7 +95,7 @@ void Mission::printSearchResultsToConsole()
 void Mission::saveSearchResultsToLog()
 {
     if (config.SearchParams[CN_SP_ST] == CN_SP_ST_SEQASTAR || config.SearchParams[CN_SP_ST] == CN_SP_ST_ASTAR) {
-        logger->writeToLogSummary(sr.numberofsteps, sr.nodescreated, sr.pathlength, sr.time, map.getCellSize(), 0);
+        logger->writeToLogSummary(sr.numberofsteps, sr.nodescreated, sr.pathlength, sr.time, map.getCellSize(), sr.memory);
         if (sr.pathfound) {
             logger->writeToLogPath(*sr.lppath);
             logger->writeToLogHPpath(*sr.hppath);

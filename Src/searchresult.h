@@ -34,6 +34,7 @@ struct SearchResult
         unsigned int nodescreated; //|OPEN| + |CLOSE| = total number of nodes saved in memory during search process.
         unsigned int numberofsteps; //number of iterations made by algorithm to find a solution
         double time; //runtime of the search algorithm (expanding nodes + reconstructing the path)
+        unsigned int memory;
         SearchResult()
         {
             pathfound = false;
@@ -45,6 +46,7 @@ struct SearchResult
             time = 0;
             lppath = nullptr;
             hppath = nullptr;
+            memory = 0;
         }
 
 };

@@ -77,6 +77,16 @@ double CalculatePathLength(const std::list<DLiteNode>& path) {
     return answer;
 }
 
+double CalculatePathLengthNode(const std::list<Node>& path) {
+    double answer = 0;
+
+    for (auto it = path.begin(); it != --path.end(); ++it) {
+        auto it1 = it;
+        answer += ((abs(it->i - (++it1)->i) + abs(it->j - (++(--it1))->j)) == 2 ? CN_SQRT_TWO : 1);
+    }
+    return answer;
+}
+
 DLiteSearchResult DLiteSearch::StartDLiteSearch(Map &Map, const EnvironmentOptions &options) {
     auto TBEGIN = std::chrono::system_clock::now();
     s_start.i = Map.getStart().first;
@@ -528,6 +538,7 @@ SearchResult Search::startSearch(const Map &map, const EnvironmentOptions &optio
 //    std::cout << sresult.numberofsteps << '\n';
 //    std::cout << sresult.nodescreated << '\n';
 //    PrintInFile(map);
+    sresult.memory = sresult.nodescreated * sizeof(Node);
     return sresult;
 }
 
@@ -862,6 +873,7 @@ SearchResult SeqSearch::startSeqSearch(Map &map, const EnvironmentOptions &optio
     sresult.hppath = &hppath;
     std::chrono::duration<double> time = (TEND - TBEGIN);
     sresult.time = time.count();
-    sresult.pathlength = 10;
+    sresult.pathlength = CalculatePathLengthNode(lppath);
+    sresult.memory = sresult.nodescreated * sizeof(Node);
     return sresult;
 }
